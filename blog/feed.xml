@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>dearshrewdwit</title>
+  <subtitle>A software engineer coach's blog</subtitle>
+  <id>https://dearshrewdwit.github.io/blog</id>
+  <link href="https://dearshrewdwit.github.io/blog"/>
+  <link href="https://dearshrewdwit.github.io/blog/feed.xml" rel="self"/>
+  <updated>2017-10-28T01:00:00+01:00</updated>
+  <author>
+    <name>Edward Withers</name>
+  </author>
+  <entry>
+    <title>Learn Actively</title>
+    <link rel="alternate" href="https://dearshrewdwit.github.io/blog/coaching/active_learning/"/>
+    <id>https://dearshrewdwit.github.io/blog/coaching/active_learning/</id>
+    <published>2017-10-28T01:00:00+01:00</published>
+    <updated>2017-10-29T12:33:49+00:00</updated>
+    <author>
+      <name>dearshrewdwit</name>
+    </author>
+    <summary type="html">&lt;h1 id="be-active-in-your-learning"&gt;Be active in your learning.&lt;/h1&gt;
+&lt;hr&gt;
+
+&lt;p&gt;Every four weeks a new cohort of beginner developers comes through the doors of &lt;a href="http://www.makersacademy.com/"&gt;Makers Academy&lt;/a&gt;. Our students come from all manner of diverse backgrounds and walks of life which makes working here an enriching experience...&lt;/p&gt;</summary>
+    <content type="html">&lt;h1 id="be-active-in-your-learning"&gt;Be active in your learning.&lt;/h1&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;Every four weeks a new cohort of beginner developers comes through the doors of &lt;a href="http://www.makersacademy.com/"&gt;Makers Academy&lt;/a&gt;. Our students come from all manner of diverse backgrounds and walks of life which makes working here an enriching experience. However, as diverse as their backgrounds are, for the most part, they have all been subjected to traditional education in a system designed to give information and then assess them according to criteria decided by others.&lt;/p&gt;
+
+&lt;p&gt;It is with this expectation most students start the course: they will be given lots of information about how to code and at regular intervals they will be told how they are doing.&lt;/p&gt;
+
+&lt;p&gt;Naturally, we disappoint them utterly.&lt;/p&gt;
+
+&lt;p&gt;As a coach, there is a familiar sense of déjà vu giving advice throughout the first six weeks. This post focuses on a core part of that advice.&lt;/p&gt;
+
+&lt;p&gt;Students learn differently and at different rates. If you're in one of our cohorts, you have a rich source of data to mine for new learning habits; everyone around you is trying to learn.&lt;/p&gt;
+
+&lt;p&gt;My advice? Be scientific about it.&lt;/p&gt;
+
+&lt;p&gt;Be as rigorous with deciding how to learn as a scientist would be designing an experiment and testing it. This may seem a little odd, but essentially, if the objective is to learn something, then the approach needs to involve a (frequently) testable hypothesis 'I have learnt that thing' with corrections to the approach.&lt;/p&gt;
+
+&lt;p&gt;Common statements from the cohorts in the first week or two include "i haven't learnt so much, or felt so engaged in my learning"
+"i wish all education was like this", "i feel like everything up to now has been a waste of learning time"&lt;/p&gt;
+
+&lt;p&gt;but also mixed in with "i am overwhelmed, how do i learn all of this?, am I doing it correctly? I need you to check my work each week?"&lt;/p&gt;
+
+&lt;p&gt;What does this mean?&lt;/p&gt;
+
+&lt;p&gt;We try to encourage and engage and enable students to actively participate in their learning.&lt;/p&gt;
+
+&lt;p&gt;It requires a few things:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;reflection&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;prioritised targets&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;fail fast fail often&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;self assessment&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="reflection"&gt;Reflection&lt;/h3&gt;
+
+&lt;p&gt;Reflection means &lt;em&gt;serious thought or consideration&lt;/em&gt;. It's worth noting this definition because reflection is a serious skill in itself that needs practice and feedback as much as it helps to learn other skills.&lt;/p&gt;
+
+&lt;p&gt;In the context of active learning, reflection is the glue that holds this technique together. Taking a step back from an activity to be able to judge how effectively it is going allows for efficient and targeted improvements to accelerate the learning process. Without reflection, when you try to learn something you're bound to the course you start which beginner developers usually judge inappropriately: far too broad of a learning objective, with no feedback. For example "I am going to learn &lt;em&gt;node.js&lt;/em&gt;". It's a great ambition, but 'I know node' is a useless hypothesis to test.&lt;/p&gt;
+
+&lt;p&gt;Frequently students come to me and say things along the lines of: I've spend the past day struggling with this bug. or and I just don't get RSpec doubles this week.&lt;/p&gt;
+
+&lt;p&gt;Use a set of questions at regular timed intervals to start training a reflective habit:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;What is my immediate objective for the next 45mins?&lt;/li&gt;
+  &lt;li&gt;Why is it my objective?&lt;/li&gt;
+  &lt;li&gt;What am I doing to get there?&lt;/li&gt;
+  &lt;li&gt;How is it going?&lt;/li&gt;
+  &lt;li&gt;What is going well?&lt;/li&gt;
+  &lt;li&gt;What isn't going well?&lt;/li&gt;
+  &lt;li&gt;How can I make it better?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id="fail-fast-fail-often"&gt;Fail fast fail often&lt;/h3&gt;
+
+&lt;p&gt;There is a tendency for beginner developers to not try different approaches. If something is working, or an approah demonstrated works 'well enough' they'll stick to it&lt;/p&gt;
+
+&lt;h3 id="self-assessment"&gt;Self assessment&lt;/h3&gt;
+
+&lt;h3 id="prioritised-targets"&gt;Prioritised targets&lt;/h3&gt;
+</content>
+  </entry>
+</feed>
