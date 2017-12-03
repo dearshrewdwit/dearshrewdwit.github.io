@@ -12,7 +12,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
-    <title>Edward A Withers</title>
+    <title>Edward A Withers - RSpec test doubles</title>
   </head>
   <body>
     <div class="page-content">
@@ -34,31 +34,8 @@
   </header>
 
   <article class="article-content">
-    <h1></h1>
-    
-<section class="article-summaries">
-    <article>
-      <h2><span>Nov 26</span>: <a href="/blog/coaching/peer-to-peer-coaching/" class="title-link">Peer-to-Peer Coaching</a> </h2>
-      <hr>
-<p>I'm six months in coaching at <a href="http://www.makersacademy.com/">Makers Academy</a>, helping beginners learn how to program. But I'm a beginner too. I'm at the beginning of a journey to get better at coaching. And to get better at anything, it's key to understand what exactly you're doing...</p>
-    </article>
-    <article>
-      <h2><span>Nov  2</span>: <a href="/blog/coaching/request-response-cycle-of-a-coach/" class="title-link">A coach's request & response cycle</a> </h2>
-      <hr>
-
-<p>This recently happened:</p>
-
-<blockquote>
-  <p>Mary Poppins [12:38 PM]</p>
-</blockquote>
-
-<blockquote>
-  <p>Dear Ed, I know that we agreed to meet today at 12.30. I am keen to keep this going. I am particularly interested in buidling a clear idea of what is happening in the node app that we have...</p>
-</blockquote>
-    </article>
-    <article>
-      <h2><span>Nov  1</span>: <a href="/blog/code/rspec-doubles/" class="title-link">RSpec test doubles</a> </h2>
-      <hr>
+    <h1>RSpec test doubles</h1>
+    <hr />
 <p>Imagine this domain.</p>
 
 <p><code>
@@ -80,16 +57,55 @@ class Cow
     @age += 1
   end
   def young?
-    @age...</code></p>
-    </article>
-    <article>
-      <h2><span>Oct 28</span>: <a href="/blog/coaching/tdd-your-own-learning/" class="title-link">TDD your own learning</a> </h2>
-      <hr>
+    @age &lt; 2
+  end
+end
+</code>
+<code>
+# Let's make some cows.
+betty = Cow.new
+sharon = Cow.new
+chris = Cow.new
+</code>
+<code>
+# let's age chris quickly.
+2.times { chris.grow }
+animals = [betty, sharon, chris]
+# let's create a herd of cows
+herd = Herd.new(animals)
+</code></p>
 
-<p>Every four weeks a new cohort of beginner developers comes through the doors of <a href="http://www.makersacademy.com/">Makers Academy</a>. Our students come from all manner of backgrounds and walks of life which makes working here an enriching experience. However, as diverse as their backgrounds...</p>
-    </article>
-</section>
+<p>Suppose now we give the herd a way to grow:</p>
 
+<p><code>
+class Herd
+  def initialize(animals)
+    @animals = animals
+  end
+  def young_animals
+    @animals.select(&amp;:young?)
+  end
+  def add(animal_class)
+    animal = animal_class.new
+    @animals &lt;&lt; animal
+    animal
+  end
+end
+</code>
+Objective: change this spec in order to test this class in isolation
+```
+describe Herd do
+  describe '#young_animals' do
+    cow1 = Cow.new
+    cow2 = Cow.new
+    animals = [cow1, cow2]
+    herd = Herd.new(animals)</p>
+
+<pre><code>expect(herd.young_animals).to eq animals   end
+</code></pre>
+
+<p>end
+```</p>
 
   </article>
 

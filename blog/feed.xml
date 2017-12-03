@@ -5,25 +5,268 @@
   <id>https://dearshrewdwit.github.io/blog</id>
   <link href="https://dearshrewdwit.github.io/blog"/>
   <link href="https://dearshrewdwit.github.io/blog/feed.xml" rel="self"/>
-  <updated>2017-10-28T01:00:00+01:00</updated>
+  <updated>2017-11-26T00:00:00+00:00</updated>
   <author>
     <name>Edward Withers</name>
   </author>
   <entry>
-    <title>TDD your own learning</title>
-    <link rel="alternate" href="https://dearshrewdwit.github.io/blog/coaching/tdd-your-own-learning/"/>
-    <id>https://dearshrewdwit.github.io/blog/coaching/tdd-your-own-learning/</id>
-    <published>2017-10-28T01:00:00+01:00</published>
-    <updated>2017-10-29T19:45:43+00:00</updated>
+    <title>Peer-to-Peer Coaching</title>
+    <link rel="alternate" href="https://dearshrewdwit.github.io/blog/coaching/peer-to-peer-coaching/"/>
+    <id>https://dearshrewdwit.github.io/blog/coaching/peer-to-peer-coaching/</id>
+    <published>2017-11-26T00:00:00+00:00</published>
+    <updated>2017-12-03T10:58:03+00:00</updated>
+    <author>
+      <name>dearshrewdwit</name>
+    </author>
+    <summary type="html">&lt;hr&gt;
+&lt;p&gt;I'm six months in coaching at &lt;a href="http://www.makersacademy.com/"&gt;Makers Academy&lt;/a&gt;, helping beginners learn how to program. But I'm a beginner too. I'm at the beginning of a journey to get better at coaching. And to get better at anything, it's key to understand what exactly you're doing...&lt;/p&gt;</summary>
+    <content type="html">&lt;hr /&gt;
+&lt;p&gt;I'm six months in coaching at &lt;a href="http://www.makersacademy.com/"&gt;Makers Academy&lt;/a&gt;, helping beginners learn how to program. But I'm a beginner too. I'm at the beginning of a journey to get better at coaching. And to get better at anything, it's key to understand what exactly you're doing and how you're doing it. This essay is a reflection on a particular part of my approach to coaching at Makers Academy.&lt;/p&gt;
+
+&lt;p&gt;No one could argue this fact: the learning environment of a student is integral to the learning trajectory of the student.&lt;/p&gt;
+
+&lt;p&gt;I want to talk about a learner's control over their environment.&lt;/p&gt;
+
+&lt;p&gt;In order to do so, let's set some context.&lt;/p&gt;
+
+&lt;h3 id="teachers-have-responsibility-for-the-learning-environment"&gt;Teachers have responsibility for the learning environment&lt;/h3&gt;
+
+&lt;p&gt;In a nutshell, teachers have responsibility for almost all of the learning environment. Quite critically this responsibility in a traditional setting inevitably translates into control over it.&lt;/p&gt;
+
+&lt;p&gt;Usually the reasons are:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Learners start off not caring about their learning&lt;/li&gt;
+  &lt;li&gt;Learners don't have objectives for after their learning&lt;/li&gt;
+  &lt;li&gt;Education at scale tends towards the least resource intensive approach&lt;/li&gt;
+  &lt;li&gt;Regular standardised qualitative assessment&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This usually causes a few things to happen:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Most students rely on the teacher to set objectives, feed information to them, and then test that they have learnt it.&lt;/li&gt;
+  &lt;li&gt;Students don't take ownership of the learning space, or their learning&lt;/li&gt;
+  &lt;li&gt;Teachers try to control more of the environment and then also individual learning&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;It's somewhat unfair to compare the two settings given that at Makers the students are adults, they have paid significantly to be there, and they have committed to a career change, which has already imbued them with far more control than the typical student at school or university. However what's important to note is the set of expectations people have of how an educational environment should go. Students and teachers alike.&lt;/p&gt;
+
+&lt;p&gt;The question is how to hand back control to re-empower students to care about their learning. Once that starts happening, then we can talk about individual strategies to accelerate learning and much more. But the key part is even with the privilege of having (for the most part) committed students, what ways can we continue to encourage and reinforce the idea that they should control their own learning environment.&lt;/p&gt;
+
+&lt;h3 id="peer-to-peer-coaching"&gt;Peer to Peer coaching&lt;/h3&gt;
+
+&lt;p&gt;Aside from the ways in which our curriculum, course materials, &amp;amp; methodology help, my perspective is that, all the rest being equal, the best learning happens in an environment where the power dynamics between the teacher and the students is lowered as far as possible. I strive for the somewhat idealistic scenario where the only imbalance between me and the other people in the room is the knowledge and experience I have compared to the others.&lt;/p&gt;
+
+&lt;p&gt;This is a mindset: as a teacher, you have to believe everyone in the room is an equal and even such categorisations as teacher and students is laden with traditional dynamics. Experienced dev and less experienced devs; I maintain the perspective we're all developers in the room, I'm just more experienced. (I use the terms student and teacher in this essay only to be clear..)&lt;/p&gt;
+
+&lt;p&gt;This perspective focuses on the imbalance on knowledge and brings the education out from a &lt;code&gt;classroom&lt;/code&gt; setting to a setting focused on transferring knowledge, skill, and behaviour.&lt;/p&gt;
+
+&lt;p&gt;These are some of the things I try to do:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;I know their names from day 1&lt;/li&gt;
+  &lt;li&gt;I check in with them as people, not students&lt;/li&gt;
+  &lt;li&gt;I actively seek their feedback, challenge them to reflect to see how they can improve their experience, and then act upon it if I can&lt;/li&gt;
+  &lt;li&gt;I ask a lot of questions during workshops I run to minimize me &lt;code&gt;lecturing&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;I have a visual name randomizer so all students are asked questions equally&lt;/li&gt;
+  &lt;li&gt;I seek to make sure every time I'm asked a question, the student leaves feeling supported&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Such is my perspective that it's a little jarring every time one of them asks me to leave a workshop to go to the bathroom, or to apologise for being away the day before, or to apologise for leaving early during the day. Usually I smile and gently remind them they are always free to do anything they wish.&lt;/p&gt;
+
+&lt;p&gt;Questions are the bread and butter of learning. I want learning spaces that are filled with questions. In order to do so learners have to be engaged, feel empowered, and have time &amp;amp; space to reflect.&lt;/p&gt;
+
+&lt;h3 id="pitfalls"&gt;Pitfalls&lt;/h3&gt;
+
+&lt;p&gt;Essentially the knowledge imbalance isn't only confined to the development expertise I have, it is also in knowledge of the course logistics and aggregated information of past students and cohorts. This inherently causes some tension between wanting to only be the more experienced dev in the room and being a central resource for the students. If I start to centralise too much information regarding non-code related things then this takes control away from students.&lt;/p&gt;
+
+&lt;p&gt;For example
+  - I start and stop workshops
+  - I follow up with students for non-code, team dynamic reasons
+  - I have intimate knowledge of the course structure, events
+  - I have aggregate information of past students and cohorts&lt;/p&gt;
+
+&lt;p&gt;There is always tension between this ideal and the educational infrastructure needed to effectively deliver the course. We recognise it and so, as much as possible, we try to document this information specifically to hand over as much control of information back to the developers (and also to reduce the workload on us, let's be honest..) Our entire course is open to the students to have a look at and know what's happening, even to the point it's versioned and they can look back at how it has changed and developed over the months and years. And we're getting better at publicising aggregate data.&lt;/p&gt;
+
+&lt;h3 id="giving-up-control-is-difficult"&gt;Giving up Control is Difficult&lt;/h3&gt;
+
+&lt;p&gt;I've definitely encountered situations where I feel like I know exactly how best to guide the learning of a student and I've had to catch myself directing it. It comes from a place of wanting to help, but a naive one in that it's helping me solve the problem in front of me in a two-dimensional fashion without realising that actually the problem is not mine solve, but the students and purpose is to help them solve it.&lt;/p&gt;
+
+&lt;p&gt;Yet, some educators just aren't confident in their knowledge, or just like being the center of attention and so rely on control to manage the learning environment&lt;/p&gt;
+
+&lt;h3 id="takeaways"&gt;Takeaways&lt;/h3&gt;
+
+&lt;p&gt;If you can: strive for the idealistic scenario where the only imbalance between you and the other people in the room is the knowledge and experience you have, and actively hand over control in all other areas.&lt;/p&gt;
+
+&lt;p&gt;See what happens 🤓&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>A coach's request &amp; response cycle</title>
+    <link rel="alternate" href="https://dearshrewdwit.github.io/blog/coaching/request-response-cycle-of-a-coach/"/>
+    <id>https://dearshrewdwit.github.io/blog/coaching/request-response-cycle-of-a-coach/</id>
+    <published>2017-11-02T00:00:00+00:00</published>
+    <updated>2017-11-26T19:10:28+00:00</updated>
     <author>
       <name>dearshrewdwit</name>
     </author>
     <summary type="html">&lt;hr&gt;
 
-&lt;p&gt;Every four weeks a new cohort of beginner developers comes through the doors of &lt;a href="http://www.makersacademy.com/"&gt;Makers Academy&lt;/a&gt;. Our students come from all manner of diverse backgrounds and walks of life which makes working here an enriching experience. However, as diverse as their...&lt;/p&gt;</summary>
+&lt;p&gt;This recently happened:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Mary Poppins [12:38 PM]&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Dear Ed, I know that we agreed to meet today at 12.30. I am keen to keep this going. I am particularly interested in buidling a clear idea of what is happening in the node app that we have...&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     <content type="html">&lt;hr /&gt;
 
-&lt;p&gt;Every four weeks a new cohort of beginner developers comes through the doors of &lt;a href="http://www.makersacademy.com/"&gt;Makers Academy&lt;/a&gt;. Our students come from all manner of diverse backgrounds and walks of life which makes working here an enriching experience. However, as diverse as their backgrounds are, for the most part, they have all been subjected to traditional education in a system designed to give information and then assess them according to criteria decided by others.&lt;/p&gt;
+&lt;p&gt;This recently happened:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Mary Poppins [12:38 PM]&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Dear Ed, I know that we agreed to meet today at 12.30. I am keen to keep this going. I am particularly interested in buidling a clear idea of what is happening in the node app that we have written for makersbnb. I don’t yet have access to the latest backend commit so this may be more constructive next week. I have also made contact with Kay who has kindly agreed to help with this project. I do think that this may need a couple of sessions so would be grateful for your guidance on this also. All best wishes, Tom&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code&gt;
+Edward Withers
+[12:39 PM]
+Hey buddy! Apologies for missing it. I hadn't put it in my calendar.
+Entirely my fault. How does 1pm sound?
+&lt;/code&gt;
+&lt;code&gt;
+Mary Poppins
+[12:43 PM]
+Many thanks Ed. As I mentioned in the earlier message I am afraid the meeting may lack some clarity due to the lack of commits on our project however it would be very useful to check how to implement Passport in node using mongoose. Best Tom
+&lt;/code&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>RSpec test doubles</title>
+    <link rel="alternate" href="https://dearshrewdwit.github.io/blog/code/rspec-doubles/"/>
+    <id>https://dearshrewdwit.github.io/blog/code/rspec-doubles/</id>
+    <published>2017-11-01T00:00:00+00:00</published>
+    <updated>2017-11-26T19:16:59+00:00</updated>
+    <author>
+      <name>dearshrewdwit</name>
+    </author>
+    <summary type="html">&lt;hr&gt;
+&lt;p&gt;Imagine this domain.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+class Herd
+  def initialize(animals)
+    @animals = animals
+  end
+  def young_animals
+    @animals.select(&amp;amp;:young?)
+  end
+end
+&lt;/code&gt;
+&lt;code&gt;
+class Cow
+  def initialize
+    @age = 0
+  end
+  def grow
+    @age += 1
+  end
+  def young?
+    @age...&lt;/code&gt;&lt;/p&gt;</summary>
+    <content type="html">&lt;hr /&gt;
+&lt;p&gt;Imagine this domain.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+class Herd
+  def initialize(animals)
+    @animals = animals
+  end
+  def young_animals
+    @animals.select(&amp;amp;:young?)
+  end
+end
+&lt;/code&gt;
+&lt;code&gt;
+class Cow
+  def initialize
+    @age = 0
+  end
+  def grow
+    @age += 1
+  end
+  def young?
+    @age &amp;lt; 2
+  end
+end
+&lt;/code&gt;
+&lt;code&gt;
+# Let's make some cows.
+betty = Cow.new
+sharon = Cow.new
+chris = Cow.new
+&lt;/code&gt;
+&lt;code&gt;
+# let's age chris quickly.
+2.times { chris.grow }
+animals = [betty, sharon, chris]
+# let's create a herd of cows
+herd = Herd.new(animals)
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Suppose now we give the herd a way to grow:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+class Herd
+  def initialize(animals)
+    @animals = animals
+  end
+  def young_animals
+    @animals.select(&amp;amp;:young?)
+  end
+  def add(animal_class)
+    animal = animal_class.new
+    @animals &amp;lt;&amp;lt; animal
+    animal
+  end
+end
+&lt;/code&gt;
+Objective: change this spec in order to test this class in isolation
+```
+describe Herd do
+  describe '#young_animals' do
+    cow1 = Cow.new
+    cow2 = Cow.new
+    animals = [cow1, cow2]
+    herd = Herd.new(animals)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;expect(herd.young_animals).to eq animals   end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;end
+```&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>TDD your own learning</title>
+    <link rel="alternate" href="https://dearshrewdwit.github.io/blog/coaching/tdd-your-own-learning/"/>
+    <id>https://dearshrewdwit.github.io/blog/coaching/tdd-your-own-learning/</id>
+    <published>2017-10-28T01:00:00+01:00</published>
+    <updated>2017-12-03T08:39:51+00:00</updated>
+    <author>
+      <name>dearshrewdwit</name>
+    </author>
+    <summary type="html">&lt;hr&gt;
+
+&lt;p&gt;Every four weeks a new cohort of beginner developers comes through the doors of &lt;a href="http://www.makersacademy.com/"&gt;Makers Academy&lt;/a&gt;. Our students come from all manner of backgrounds and walks of life which makes working here an enriching experience. However, as diverse as their backgrounds...&lt;/p&gt;</summary>
+    <content type="html">&lt;hr /&gt;
+
+&lt;p&gt;Every four weeks a new cohort of beginner developers comes through the doors of &lt;a href="http://www.makersacademy.com/"&gt;Makers Academy&lt;/a&gt;. Our students come from all manner of backgrounds and walks of life which makes working here an enriching experience. However, as diverse as their backgrounds are, for the most part, they have all been subjected to traditional education in a system designed to give information and then assess them according to criteria decided by others.&lt;/p&gt;
 
 &lt;p&gt;It is with this expectation most students start the course: they will be given lots of information about how to code and at regular intervals they will be told how they are doing.&lt;/p&gt;
 
