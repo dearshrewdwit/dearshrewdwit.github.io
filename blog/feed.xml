@@ -14,7 +14,7 @@
     <link rel="alternate" href="https://dearshrewdwit.github.io/blog/coaching/peer-to-peer-coaching/"/>
     <id>https://dearshrewdwit.github.io/blog/coaching/peer-to-peer-coaching/</id>
     <published>2017-11-26T00:00:00+00:00</published>
-    <updated>2017-12-03T10:58:03+00:00</updated>
+    <updated>2017-12-03T11:20:20+00:00</updated>
     <author>
       <name>dearshrewdwit</name>
     </author>
@@ -103,161 +103,11 @@
 </content>
   </entry>
   <entry>
-    <title>A coach's request &amp; response cycle</title>
-    <link rel="alternate" href="https://dearshrewdwit.github.io/blog/coaching/request-response-cycle-of-a-coach/"/>
-    <id>https://dearshrewdwit.github.io/blog/coaching/request-response-cycle-of-a-coach/</id>
-    <published>2017-11-02T00:00:00+00:00</published>
-    <updated>2017-11-26T19:10:28+00:00</updated>
-    <author>
-      <name>dearshrewdwit</name>
-    </author>
-    <summary type="html">&lt;hr&gt;
-
-&lt;p&gt;This recently happened:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Mary Poppins [12:38 PM]&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Dear Ed, I know that we agreed to meet today at 12.30. I am keen to keep this going. I am particularly interested in buidling a clear idea of what is happening in the node app that we have...&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
-    <content type="html">&lt;hr /&gt;
-
-&lt;p&gt;This recently happened:&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Mary Poppins [12:38 PM]&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Dear Ed, I know that we agreed to meet today at 12.30. I am keen to keep this going. I am particularly interested in buidling a clear idea of what is happening in the node app that we have written for makersbnb. I don’t yet have access to the latest backend commit so this may be more constructive next week. I have also made contact with Kay who has kindly agreed to help with this project. I do think that this may need a couple of sessions so would be grateful for your guidance on this also. All best wishes, Tom&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;code&gt;
-Edward Withers
-[12:39 PM]
-Hey buddy! Apologies for missing it. I hadn't put it in my calendar.
-Entirely my fault. How does 1pm sound?
-&lt;/code&gt;
-&lt;code&gt;
-Mary Poppins
-[12:43 PM]
-Many thanks Ed. As I mentioned in the earlier message I am afraid the meeting may lack some clarity due to the lack of commits on our project however it would be very useful to check how to implement Passport in node using mongoose. Best Tom
-&lt;/code&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>RSpec test doubles</title>
-    <link rel="alternate" href="https://dearshrewdwit.github.io/blog/code/rspec-doubles/"/>
-    <id>https://dearshrewdwit.github.io/blog/code/rspec-doubles/</id>
-    <published>2017-11-01T00:00:00+00:00</published>
-    <updated>2017-11-26T19:16:59+00:00</updated>
-    <author>
-      <name>dearshrewdwit</name>
-    </author>
-    <summary type="html">&lt;hr&gt;
-&lt;p&gt;Imagine this domain.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-class Herd
-  def initialize(animals)
-    @animals = animals
-  end
-  def young_animals
-    @animals.select(&amp;amp;:young?)
-  end
-end
-&lt;/code&gt;
-&lt;code&gt;
-class Cow
-  def initialize
-    @age = 0
-  end
-  def grow
-    @age += 1
-  end
-  def young?
-    @age...&lt;/code&gt;&lt;/p&gt;</summary>
-    <content type="html">&lt;hr /&gt;
-&lt;p&gt;Imagine this domain.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-class Herd
-  def initialize(animals)
-    @animals = animals
-  end
-  def young_animals
-    @animals.select(&amp;amp;:young?)
-  end
-end
-&lt;/code&gt;
-&lt;code&gt;
-class Cow
-  def initialize
-    @age = 0
-  end
-  def grow
-    @age += 1
-  end
-  def young?
-    @age &amp;lt; 2
-  end
-end
-&lt;/code&gt;
-&lt;code&gt;
-# Let's make some cows.
-betty = Cow.new
-sharon = Cow.new
-chris = Cow.new
-&lt;/code&gt;
-&lt;code&gt;
-# let's age chris quickly.
-2.times { chris.grow }
-animals = [betty, sharon, chris]
-# let's create a herd of cows
-herd = Herd.new(animals)
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Suppose now we give the herd a way to grow:&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-class Herd
-  def initialize(animals)
-    @animals = animals
-  end
-  def young_animals
-    @animals.select(&amp;amp;:young?)
-  end
-  def add(animal_class)
-    animal = animal_class.new
-    @animals &amp;lt;&amp;lt; animal
-    animal
-  end
-end
-&lt;/code&gt;
-Objective: change this spec in order to test this class in isolation
-```
-describe Herd do
-  describe '#young_animals' do
-    cow1 = Cow.new
-    cow2 = Cow.new
-    animals = [cow1, cow2]
-    herd = Herd.new(animals)&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;expect(herd.young_animals).to eq animals   end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;end
-```&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
     <title>TDD your own learning</title>
     <link rel="alternate" href="https://dearshrewdwit.github.io/blog/coaching/tdd-your-own-learning/"/>
     <id>https://dearshrewdwit.github.io/blog/coaching/tdd-your-own-learning/</id>
     <published>2017-10-28T01:00:00+01:00</published>
-    <updated>2017-12-03T08:39:51+00:00</updated>
+    <updated>2017-12-03T11:20:40+00:00</updated>
     <author>
       <name>dearshrewdwit</name>
     </author>
