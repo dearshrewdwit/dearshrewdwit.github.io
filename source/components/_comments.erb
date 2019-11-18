@@ -1,0 +1,10 @@
+<div id="article-comments">
+  <div id="article-comments-list">
+    <p>-----</p>
+  </div>
+</div>
+
+<script type="text/javascript">
+  let element = $('#article-comments-list')
+  new GithubCommentList(element, <%= gh_issue_number %>)
+</script>

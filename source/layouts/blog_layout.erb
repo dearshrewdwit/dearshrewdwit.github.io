@@ -1,0 +1,26 @@
+<% wrap_layout :layout do %>
+  <header>
+    <%= partial 'components/author-name' %>
+
+    <header class="navigation-links">
+      <span id="desktop-only">
+        <%= link_to 'About', '/', class: 'nav-link' %>
+        <%= link_to 'Blog', '/blog', class: 'nav-link' %>
+        <%= link_to 'All posts', '/blog/archive', class: 'nav-link' %>
+        <%= link_to 'RSS', '/blog/feed.xml', class: 'nav-link' %>
+      </span>
+    </header>
+  </header>
+
+  <article class="article-content">
+    <% if current_article %>
+      <h1><%= current_article.date.strftime('%b %-d %Y') %>: <%=  current_article.title %></h1>
+    <% end %>
+
+    <%= yield %>
+
+    <% if current_article %>
+      <%= partial 'components/comments', locals: { gh_issue_number: current_article.data.gh_issue_number} %>
+    <% end %>
+  </article>
+<% end %>
