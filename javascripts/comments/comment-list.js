@@ -1,0 +1,1 @@
+function CommentList(n,e){function r(){return["<h6>","COMMENTS  -  add your own on the <b><a href='"+n+"'> github issue</a></b> <em>(requires a github account)</em>","</h6>",e.map(function(n){return new Comment(n).render()}).join("")].join("")}return{render:r}}

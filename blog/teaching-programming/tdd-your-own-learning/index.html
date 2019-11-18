@@ -1,9 +1,16 @@
 <link href="/stylesheets/blog.css" rel="stylesheet" />
 <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/blog/feed.xml" />
+<script src='/javascripts/site.js'></script>
 
 <!doctype html>
 <html>
   <head>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+
     <link href="/stylesheets/main.css" rel="stylesheet" />
     <link href="/stylesheets/homepage.css" rel="stylesheet" />
     <link href="/images/profile_pic.ico" rel="icon" type="image/ico" />
@@ -12,7 +19,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
-    <title>Edward A Withers - TDD your own learning</title>
+    <title>Edward A Withers - Advice to learners - TDD your own learning</title>
   </head>
   <body>
     <div class="page-content">
@@ -34,7 +41,7 @@
   </header>
 
   <article class="article-content">
-    <h1>TDD your own learning</h1>
+    <h1>10/28/2017 - Advice to learners - TDD your own learning</h1>
     <hr />
 
 <p>Every four weeks a new cohort of beginner developers comes through the doors of <a href="http://www.makersacademy.com/">Makers Academy</a>. Our students come from all manner of backgrounds and walks of life which makes working here an enriching experience. However, as diverse as their backgrounds are, for the most part, they have all been subjected to traditional education in a system designed to give information and then assess them according to criteria decided by others.</p>
@@ -188,6 +195,18 @@
 <p>If that is a good enough test you can start to break out smaller unit tests for learning: 'I can implement two different ways to stub', 'I can explain how stubbing works', 'I can evaluate the different scenarios in which you would stub behaviour', 'I can tell the difference between stubs and mocks'</p>
 
 <p>And potentially break each one of those down still further. The important part here is to always think test first, which helps drive learning towards a goal.</p>
+
+    <div id="article-comments">
+    <div id="article-comments-list">
+      <p>-----</p>
+    </div>
+    <a href="javascript:void(0)" id="gh-load-comments" class="btn" style="display:none">Load more comments</a>
+</div>
+
+<script type="text/javascript">
+    var element = $('#article-comments-list')
+    new GithubCommentList(element, 2)
+</script>
 
   </article>
 
