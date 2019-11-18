@@ -8,7 +8,6 @@
 
     <link href="/images/profile_pic.ico" rel="icon" type="image/ico" />
     <link href="/stylesheets/homepage.css" rel="stylesheet" />
-    <link href="/stylesheets/blog.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet" />
     <script src="/javascripts/site.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -18,7 +17,19 @@
   </head>
   <body>
     <div class="page-content">
-      
+      <ul>
+  &lt;% blog.articles.group_by {|a| a.date.year }.each do |year, articles| %&gt;
+    <li>
+      <h5>&lt;%= year %&gt;</h5>
+      <ul>
+        &lt;% articles.each do |article| %&gt;
+          <li><a href="&lt;%= article.url %&gt;">&lt;%= article.title %&gt;</a></li>
+        &lt;% end %&gt;
+      </ul>
+    </li>
+  &lt;% end %&gt;
+</ul>
+
     </div>
   </body>
 </html>
