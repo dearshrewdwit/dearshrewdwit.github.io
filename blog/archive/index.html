@@ -19,16 +19,22 @@
   <body>
     <div class="page-content">
       <ul>
-  &lt;% blog.articles.group_by {|a| a.date.year }.each do |year, articles| %&gt;
     <li>
-      <h5>&lt;%= year %&gt;</h5>
+      <h5>2019</h5>
       <ul>
-        &lt;% articles.each do |article| %&gt;
-          <li><a href="&lt;%= article.url %&gt;">&lt;%= article.title %&gt;</a></li>
-        &lt;% end %&gt;
+          <li><a href="/blog/dev-notes/learning-forth/">Learning Forth</a></li>
+          <li><a href="/blog/teaching-programming/responding-to-learners/">Experts responding to beginners.</a></li>
+          <li><a href="/blog/teaching-programming/self-directed-learning-in-practice/">Self-directed learning in practice.</a></li>
+          <li><a href="/blog/teaching-programming/notes-on-learning-environments/">Notes on learning environments</a></li>
       </ul>
     </li>
-  &lt;% end %&gt;
+    <li>
+      <h5>2017</h5>
+      <ul>
+          <li><a href="/blog/teaching-programming/notes-on-coaching/">Notes on Coaching</a></li>
+          <li><a href="/blog/teaching-programming/test-drive-your-learning/">Advice to learners - Test-drive your learning</a></li>
+      </ul>
+    </li>
 </ul>
 
     </div>
