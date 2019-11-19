@@ -43,6 +43,6 @@ end
 # Deploy config
 activate :deploy do |deploy|
   deploy.deploy_method = :git
-  deploy.branch = 'production'
+  deploy.branch = 'master'
   deploy.build_before = true
 end
