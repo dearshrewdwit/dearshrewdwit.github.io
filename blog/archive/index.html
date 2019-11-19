@@ -18,7 +18,19 @@
   </head>
   <body>
     <div class="page-content">
-      
+      <ul>
+  &lt;% blog.articles.group_by {|a| a.date.year }.each do |year, articles| %&gt;
+    <li>
+      <h5>&lt;%= year %&gt;</h5>
+      <ul>
+        &lt;% articles.each do |article| %&gt;
+          <li><a href="&lt;%= article.url %&gt;">&lt;%= article.title %&gt;</a></li>
+        &lt;% end %&gt;
+      </ul>
+    </li>
+  &lt;% end %&gt;
+</ul>
+
     </div>
   </body>
 </html>
