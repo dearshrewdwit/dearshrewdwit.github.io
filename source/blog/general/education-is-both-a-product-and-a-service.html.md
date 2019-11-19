@@ -2,7 +2,7 @@
 title: Education is a product and a service
 author: dearshrewdwit
 date: 2019-11-18
-gh_issue_number: 11
+gh_issue_number: 8
 ---
 
 ___
