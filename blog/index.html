@@ -10,6 +10,7 @@
     <link href="/stylesheets/homepage.css" rel="stylesheet" />
     <link href="/stylesheets/blog.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet" />
+
     <script src="/javascripts/site.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
@@ -37,8 +38,20 @@
 
       <section class='article-summaries'>
     <article>
+      <h2>Nov 20 2019: <a href="/blog/teaching-programming/experiment-to-learn-about-testing-stdout-in-ruby/" class="title-link">An experiment to learn about mocking by testing stdout in Ruby</a></h2>
+      <hr>
+
+<p><br>
+<br></p>
+
+<h1 id="inquiry-projects">Inquiry Projects</h1>
+
+<p>Inquiry Projects, a term borrowed from <a href="https://eric.ed.gov/?id=ED114653">M Knowles</a>, are designed by learners to provide opportunities to dive deeper into knowledge, practice uncovering areas of ignorances, and identify improvements to your approach to learning...</p>
+    </article>
+
+    <article>
       <h2>Nov 18 2019: <a href="/blog/general/training-for-an-ultra/" class="title-link">Training for an Ultra</a></h2>
-      <hr />
+      <hr>
 
 <p>Training for an Ultra
 Training for an Ultra
@@ -48,7 +61,7 @@ hmmm.</p>
 
     <article>
       <h2>Nov 18 2019: <a href="/blog/general/education-is-both-a-product-and-a-service/" class="title-link">Education is a product and a service</a></h2>
-      <hr />
+      <hr>
 
 <p>Education is a product and a service. What is design?
 This should work.</p>
@@ -59,11 +72,11 @@ This should work.</p>
       <h2>Oct 22 2019: <a href="/blog/dev-notes/learning-forth/" class="title-link">Learning Forth</a></h2>
       <hr>
 
-<p>https://www.forth.com/starting-forth/</p>
+<p><a href="https://www.forth.com/starting-forth/">https://www.forth.com/starting-forth/</a></p>
 
 <p>then I googled a bunch - different implementations.</p>
 
-<p>found this one https://www.gnu.org/software/gforth/</p>
+<p>found this one <a href="https://www.gnu.org/software/gforth/">https://www.gnu.org/software/gforth/</a></p>
 
 <p>which took me to the 0.73 gforth implementation</p>
 
@@ -72,7 +85,7 @@ This should work.</p>
 
     <article>
       <h2>Oct 17 2019: <a href="/blog/teaching-programming/self-directed-learning-in-practice/" class="title-link">Self-directed learning in practice.</a></h2>
-      <hr />
+      <hr>
 
 <p>Self-directed learning in practice.</p>
 
@@ -80,7 +93,7 @@ This should work.</p>
 
     <article>
       <h2>Oct 17 2019: <a href="/blog/teaching-programming/notes-on-learning-environments/" class="title-link">Notes on learning environments</a></h2>
-      <hr />
+      <hr>
 
 <p>Notes on learning environments</p>
 
@@ -93,13 +106,33 @@ This should work.</p>
 <p>Getting better at learning is the best thing you can do.</p>
 
 <h2 id="part-2">Part 2</h2>
+
 <p><em>Updated on 27-04-2018</em></p>
 
 <p>I've been a software engineering coach at Makers Academy for 10 months. That in itself is a feat.</p>
 
 <p>I had a conversation that I wanted to fully transcribe.</p>
 
-<p>I...</p>
+
+    </article>
+
+    <article>
+      <h2>Jun 12 2019: <a href="/blog/dev-notes/reimplementing-classes-in-ruby/" class="title-link">Reimplementing classes in ruby</a></h2>
+      <hr>
+
+<p>A short challenge to reimplement the class keyword in ruby.</p>
+
+<p>I used <code>Kernel#binding</code> to set scope.</p>
+
+<p>Have a look <a href="https://gist.github.com/dearshrewdwit/8ce0da6f1b1a52fb700f66263240047e">here</a> for the gist.</p>
+
+<p>Pretty, huh?</p>
+
+<hr>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #6c71c4">module</span> <span style="color: #b58900">BasicClass</span>
+  <span style="color: #6c71c4">def</span> <span style="color: #b58900">self</span><span style="color: #93a1a1">.</span><span style="color: #586e75">new</span><span style="color: #93a1a1">(</span><span style="color: #586e75">parent_klass</span> <span style="color: #93a1a1">=</span> <span style="color: #6c71c4">nil</span><span style="color: #93a1a1">,</span> <span style="color: #93a1a1">&amp;</span><span style="color: #586e75">block</span><span style="color: #93a1a1">)</span>
+    <span style="color: #586e75">klass</span> <span style="color: #93a1a1">=</span> <span style="color: #586e75">lambda</span> <span style="color: #6c71c4">do</span>
+      <span style="color: #586e75">class_scope</span></code></pre></div>
     </article>
 
     <article>

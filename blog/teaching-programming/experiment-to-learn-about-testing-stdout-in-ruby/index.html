@@ -1,0 +1,673 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="/images/profile_pic.ico" rel="icon" type="image/ico" />
+    <link href="/stylesheets/homepage.css" rel="stylesheet" />
+    <link href="/stylesheets/blog.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet" />
+
+    <script src="/javascripts/site.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>An experiment to learn about mocking by testing stdout in Ruby</title>
+  </head>
+  <body>
+    <div class="page-content">
+        <div class="blog-page-content">
+    <header>
+      <h3><a href="/" class="author-name title-link">Edward Withers</a></h3>
+
+
+      <header class="navigation-links">
+        <span id="desktop-only">
+          <a href="/" class="nav-link">About</a>
+          <a href="/blog" class="nav-link">Blog</a>
+          <a href="/blog/archive" class="nav-link">All posts</a>
+          <a href="/blog/feed.xml" class="nav-link">RSS</a>
+        </span>
+      </header>
+    </header>
+
+    <article class="article-content">
+        <h1>Nov 20 2019: An experiment to learn about mocking by testing stdout in Ruby</h1>
+
+      <hr>
+
+<p><br/>
+<br/></p>
+
+<h1 id="inquiry-projects">Inquiry Projects</h1>
+
+<p>Inquiry Projects, a term borrowed from <a href="https://eric.ed.gov/?id=ED114653">M Knowles</a>, are designed by learners to provide opportunities to dive deeper into knowledge, practice uncovering areas of ignorances, and identify improvements to your approach to learning.</p>
+
+<h3 id="project-structure">Project Structure</h3>
+
+<p>This is a structured project. Objectives have been set, steps identified, and some resources shared.</p>
+
+<p>Each step of this project has</p>
+
+<ul>
+<li>a set of learning objectives to measure your progress against</li>
+<li>an intro to give context</li>
+<li>instructions to guide learning</li>
+<li>recommended resources</li>
+<li>a link to jump back to the project map below.</li>
+</ul>
+
+<p>However, I warmly encourage you to push beyond the structure and see where your exploration takes you! Identify and use more resources, add in your own objectives and steps. Learning is most fun and rewarding when it&#39;s playtime, fun, and allowed to run free!</p>
+
+<p>Remember: have fun!</p>
+
+<h3 id="if-you-get-stuck">If you get stuck</h3>
+
+<ul>
+<li>Leave a <a href="https://stackoverflow.com/help/how-to-ask">well-explained</a> comment and someone will respond!</li>
+<li>Find someone to explain your problem to</li>
+<li>Find an expert to help you.</li>
+<li>Take a break, have a nap, muse on life.</li>
+</ul>
+
+<h3 id="experiments-need-feedback">Experiments need feedback</h3>
+
+<p>I need your thoughts! As you progress through this project, whenever you feel like it, scroll down right to the bottom or <a href="#feedback">jump</a> there to leave feedback.</p>
+
+<p><br/>
+<br/>
+<br/></p>
+
+<h2 id="inquiry-project-testing-puts-in-plain-ruby">Inquiry Project: testing #puts (in plain ruby)</h2>
+
+<p><br/></p>
+<div class="highlight"><pre class="highlight ruby"><code> <span style="color: #586e75">puts</span> <span style="color: #859900">"let's explore!"</span> <span style="color: #657b83"># whoaah, hold. up. how does #puts actually work</span>
+</code></pre></div>
+<p><br/></p>
+
+<p>Let&#39;s learn about mocking, by diving into how to test <code>#puts</code> in ruby!</p>
+
+<h3 id="project-goals">Project Goals</h3>
+
+<h4 id="main-goal-explain-why-replacing-dependencies-with-test-objects-helps-you-test-code">Main goal: Explain why replacing dependencies with test objects helps you test code</h4>
+
+<p>Subgoals:</p>
+
+<ul>
+<li>Explain how <code>#puts</code> works</li>
+<li>Use plain ruby to test output to STDOUT</li>
+<li>Use <code>pry</code> to get visibility on how your code executes</li>
+<li>Use blocks and <code>yield</code></li>
+</ul>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<ul>
+<li><a href="https://github.com/pry/pry/#installation">install pry</a>
+
+<ul>
+<li><code>irb</code> clumsily sends <a href="https://ruby-doc.org/stdlib-2.6.5/libdoc/pry/rdoc/pry/Notifier.html"><em>all</em> expressions</a> to STDOUT, whereas <code>pry</code> doesn&#39;t.</li>
+<li>It&#39;s got nice colours too. And secretly it&#39;s far more powerful than you know!</li>
+</ul></li>
+</ul>
+
+<h3 id="project-map">Project Map</h3>
+
+<p>Use these links to jump to different steps:</p>
+
+<ul>
+<li><a href="#1-what-does-puts-do?">what is puts doing - part1</a></li>
+<li><a href="#2-what-does-puts-do-continued">what is puts doing - part2</a></li>
+<li><a href="#3-what-does-puts-do-continued">what is puts doing - part3</a></li>
+<li><a href="#4-replacing-output">replacing output</a></li>
+<li><a href="#5-testing-output">testing output</a></li>
+<li><a href="#6-refactoring-step">refactoring step</a></li>
+</ul>
+
+<p><a href="#inquiry-projects">Back to top</a></p>
+
+<p><br/>
+<br/>
+<br/></p>
+
+<h2 id="1-what-does-puts-do">1. What does #puts do?</h2>
+
+<p><br/></p>
+<div class="highlight"><pre class="highlight plaintext"><code>"The most effective debugging tool is still careful thought, coupled with judiciously placed print statements."
+
+— Brian Kernighan, "Unix for Beginners" (1979)
+</code></pre></div>
+<h3 id="learning-objectives">Learning Objectives</h3>
+
+<ul>
+<li>explain what happens when you call <code>#puts</code></li>
+<li>use <code>pry</code> to explore and gain visibility</li>
+</ul>
+
+<h3 id="intro">Intro</h3>
+
+<p>Start a <code>pry</code> session and load this code snippet (require a file which has this contents, or copy the code straight into <code>pry</code>)</p>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #b58900">QUESTIONS</span> <span style="color: #93a1a1">=</span> <span style="color: #93a1a1">[</span>
+  <span style="color: #859900">'What is the capital of France?'</span><span style="color: #93a1a1">,</span>
+  <span style="color: #859900">'What is the capital of Italy?'</span>
+<span style="color: #93a1a1">]</span>
+
+<span style="color: #6c71c4">def</span> <span style="color: #586e75">run</span>
+  <span style="color: #b58900">QUESTIONS</span><span style="color: #93a1a1">.</span><span style="color: #586e75">each</span> <span style="color: #6c71c4">do</span> <span style="color: #93a1a1">|</span><span style="color: #586e75">question</span><span style="color: #93a1a1">|</span>
+    <span style="color: #586e75">puts</span> <span style="color: #586e75">question</span>
+  <span style="color: #6c71c4">end</span>
+<span style="color: #6c71c4">end</span>
+</code></pre></div>
+<p>Make a hypothesis what will happen when you call the <code>#run</code> method.</p>
+
+<ul>
+<li>What&#39;s the output?</li>
+<li>What&#39;s returned?</li>
+</ul>
+
+<p><br/>
+<br/>
+<br/>
+<br/></p>
+
+<p>Scroll down!</p>
+
+<p><br/>
+<br/>
+<br/>
+<br/></p>
+
+<p>Now call <code>#run</code> in <code>pry</code>.</p>
+
+<p><strong>Discuss:</strong> What happened - did it meet your hypothesis?</p>
+
+<p><br/></p>
+
+<p>You may have got something like:</p>
+<div class="highlight"><pre class="highlight shell"><code><span style="color: #657b83"># in pry</span>
+<span style="color: #93a1a1">&gt;</span> run <span style="color: #657b83"># call the method #run</span>
+What is the capital of France?
+What is the capital of Italy?
+<span style="color: #93a1a1">=&gt;</span> <span style="color: #93a1a1">[</span><span style="color: #859900">"What is the capital of France?"</span>, <span style="color: #859900">"What is the capital of Italy?"</span><span style="color: #93a1a1">]</span>
+</code></pre></div>
+<p><br/></p>
+
+<p>Using the above example, in <strong>pseudocode</strong> perhaps a test that codifies the expected behaviour could look something like:</p>
+
+<p><code>when I call #run, it outputs &#39;What is the capital of France? What is the capital of Italy?&#39;</code></p>
+
+<p>Which perhaps could be transliterated like this in ruby:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #586e75">run</span> <span style="color: #93a1a1">==</span> <span style="color: #859900">'What is the capital of France?What is the capital of Italy?'</span>
+<span style="color: #657b83"># we expect that this evaluates to true if the #run method is written correctly</span>
+</code></pre></div>
+<p>Try this in your <code>pry</code> session. What happens?</p>
+
+<p>Probably something like this:</p>
+<div class="highlight"><pre class="highlight shell"><code><span style="color: #93a1a1">&gt;</span> run <span style="color: #93a1a1">==</span> <span style="color: #859900">'What is the capital of France?What is the capital of Italy?'</span>
+What is the capital of France?
+What is the capital of Italy?
+ <span style="color: #93a1a1">=&gt;</span> <span style="color: #586e75">false</span>
+
+</code></pre></div>
+<p>It&#39;s not doing what you want because <code>#puts</code> returns <code>nil</code>:</p>
+<div class="highlight"><pre class="highlight shell"><code><span style="color: #93a1a1">&gt;</span> puts <span style="color: #859900">"a string"</span>
+a string <span style="color: #657b83"># output</span>
+<span style="color: #93a1a1">=&gt;</span> nil <span style="color: #657b83"># return value</span>
+
+<span style="color: #657b83"># so clearly this won't work because nil != "a string"</span>
+<span style="color: #93a1a1">&gt;</span> puts <span style="color: #859900">"a string"</span>  <span style="color: #93a1a1">==</span> <span style="color: #859900">"a string"</span>
+a string <span style="color: #657b83"># output</span>
+<span style="color: #93a1a1">=&gt;</span> <span style="color: #586e75">false</span> <span style="color: #657b83"># return value</span>
+</code></pre></div>
+<p>Every time we call the method <code>#puts</code> in our application code we&#39;re sending data to the terminal (this is <a href="https://stackoverflow.com/questions/189562/what-is-the-proper-name-for-doing-debugging-by-adding-print-statements">helpful</a>) and then it returns <code>nil</code>.</p>
+
+<p>If we can understand more about how <code>#puts</code> works, then we can find a way to capture the strings passed to it so we can test that they are correct.</p>
+
+<h3 id="to-complete-this-challenge-play-around-with-the-following">To complete this challenge, play around with the following:</h3>
+
+<ul>
+<li>[ ] Open up  <code>pry</code></li>
+<li>[ ] Create an empty <code>Cat</code> class.</li>
+<li>[ ] Create a <code>Cat</code> instance and call <code>#to_s</code> on it.
+
+<ul>
+<li>Then <code>puts(cat)</code>, where cat is your instance.</li>
+</ul></li>
+<li>[ ] Create an <code>Iguana</code> class and define your own <code>#to_s</code> instance method that returns a string.</li>
+<li>[ ] Create an <code>Iguana</code>instance and call <code>#to_s</code> on it.
+
+<ul>
+<li>Then <code>puts(iguana)</code> where iguana is your instance.</li>
+</ul></li>
+<li>[ ] <strong>Discuss</strong> what you observe</li>
+</ul>
+
+<h3 id="further-inquiry">Further inquiry</h3>
+
+<ul>
+<li>[ ] Explain the difference between <code>#print</code>, <code>#puts</code>, <code>#p</code></li>
+<li>[ ] Explore using ruby&#39;s docs how one of the above methods works.</li>
+</ul>
+
+<h3 id="resources">Resources</h3>
+
+<ul>
+<li><a href="https://www.rubyguides.com/2018/10/puts-vs-print/">Rubyguides - difference in print, puts, p</a></li>
+</ul>
+
+<p><a href="#project-map">Back to project map</a></p>
+
+<p><br/>
+<br/>
+<br/></p>
+
+<h2 id="2-what-does-puts-do-continued">2. What does #puts do - continued</h2>
+
+<h3 id="learning-objectives">Learning Objectives</h3>
+
+<ul>
+<li>explain what happens when you call <code>#puts</code></li>
+</ul>
+
+<h3 id="intro">Intro</h3>
+
+<p>You maybe tried something along the lines of:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #6c71c4">class</span> <span style="color: #b58900">Cat</span>
+
+<span style="color: #6c71c4">end</span>
+
+<span style="color: #657b83"># in pry</span>
+<span style="color: #93a1a1">&gt;</span> <span style="color: #b58900">Cat</span><span style="color: #93a1a1">.</span><span style="color: #586e75">new</span><span style="color: #93a1a1">.</span><span style="color: #586e75">to_s</span>
+<span style="color: #657b83"># =&gt; "#&lt;Cat:0x00007f8d458e1988&gt;"</span>
+
+<span style="color: #93a1a1">&gt;</span> <span style="color: #586e75">puts</span> <span style="color: #b58900">Cat</span><span style="color: #93a1a1">.</span><span style="color: #586e75">new</span>
+<span style="color: #657b83"># &lt;Cat:0x00007fe42a9676f0&gt;</span>
+<span style="color: #657b83"># =&gt; nil</span>
+</code></pre></div><div class="highlight"><pre class="highlight ruby"><code><span style="color: #6c71c4">class</span> <span style="color: #b58900">Iguana</span>
+  <span style="color: #6c71c4">def</span> <span style="color: #586e75">to_s</span>
+    <span style="color: #859900">"Roar, I'm a tiny dragon!"</span>
+  <span style="color: #6c71c4">end</span>
+<span style="color: #6c71c4">end</span>
+
+<span style="color: #657b83"># in pry</span>
+<span style="color: #93a1a1">&gt;</span> <span style="color: #b58900">Iguana</span><span style="color: #93a1a1">.</span><span style="color: #586e75">new</span><span style="color: #93a1a1">.</span><span style="color: #586e75">to_s</span>
+<span style="color: #657b83"># =&gt; "Roar, I'm a tiny dragon!"</span>
+
+<span style="color: #93a1a1">&gt;</span> <span style="color: #586e75">puts</span> <span style="color: #b58900">Iguana</span><span style="color: #93a1a1">.</span><span style="color: #586e75">new</span>
+<span style="color: #657b83"># Roar, I'm a tiny dragon!</span>
+<span style="color: #657b83"># =&gt; nil</span>
+</code></pre></div>
+<p>It uses the <a href="https://gist.github.com/damien-roche/351bf4e7991449714533">hierarchy of method lookups</a> to find a <code>#to_s</code> method
+, calls it, and then somehow it pops up in the terminal.</p>
+
+<p>So before <code>#puts</code> sends data to your terminal it tries to find a string respresentation of its argument(s). Easy enough when you&#39;re calling <code>#puts</code> with strings - but you can pass it any type, and it will try and convert it to a String.</p>
+
+<p>But then how does this data appear in your terminal?</p>
+
+<h3 id="to-complete-this-challenge-you-will-need-to">To complete this challenge, you will need to:</h3>
+
+<ul>
+<li>[ ] Explain in simple terms
+
+<ul>
+<li>what connects <code>#puts</code> with the terminal</li>
+<li>what Input and Output are in ruby</li>
+</ul></li>
+</ul>
+
+<h3 id="resources">Resources</h3>
+
+<ul>
+<li><a href="https://robots.thoughtbot.com/io-in-ruby">thoughtbot - I/O in ruby</a></li>
+<li><a href="http://ruby-doc.org/core-2.2.2/IO.html">ruby docs - IO</a></li>
+</ul>
+
+<p><a href="#project-map">Back to project map</a></p>
+
+<p><br/>
+<br/>
+<br/></p>
+
+<h2 id="3-what-does-puts-do-continued">3. What does #puts do - continued</h2>
+
+<h3 id="learning-objectives">Learning Objectives</h3>
+
+<ul>
+<li>[ ] Explain that a ruby object connects to the STDOUT stream</li>
+</ul>
+
+<h3 id="intro">Intro</h3>
+
+<p>So what is the object being written to with the <code>#puts</code> method? What connects the <code>#puts</code> with the terminal where the result is shown? How does this help us test when using <code>#puts</code> ?</p>
+
+<p>Have a look at the following. Run them in <code>pry</code>:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #586e75">$stdout</span><span style="color: #93a1a1">.</span><span style="color: #586e75">puts</span><span style="color: #93a1a1">(</span><span style="color: #859900">'hello'</span><span style="color: #93a1a1">)</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #b58900">STDOUT</span><span style="color: #93a1a1">.</span><span style="color: #586e75">puts</span><span style="color: #93a1a1">(</span><span style="color: #859900">'hello'</span><span style="color: #93a1a1">)</span>
+</code></pre></div>
+<p>What is stored in both the variable and constant?</p>
+
+<p>Explore what they return:</p>
+<div class="highlight"><pre class="highlight shell"><code><span style="color: #93a1a1">&gt;</span> <span style="color: #586e75">$stdout</span>
+<span style="color: #93a1a1">=&gt;</span> <span style="color: #657b83">#&lt;IO:&lt;STDOUT&gt;&gt;</span>
+<span style="color: #93a1a1">&gt;</span> STDOUT
+<span style="color: #93a1a1">=&gt;</span> <span style="color: #657b83">#&lt;IO:&lt;STDOUT&gt;&gt;</span>
+</code></pre></div>
+<h3 id="the-io-class">The IO class</h3>
+
+<p>Ruby IO objects wrap Input/Output streams.</p>
+
+<p>The constants <code>STDIN</code>, <code>STDOUT</code>, and <code>STDERR</code> point to IO objects wrapping the standard streams, which themselves are files on your machine. By default the global variables <code>$stdin</code>, <code>$stdout</code>, and <code>$stderr</code> point to their respective constants. While the constants should always point to the default streams, <strong>the globals can be overwritten to point to another I/O stream such as a file, socket, or any oject that implements the same read/write interface. IO objects can be written to via puts and print</strong>.</p>
+
+<p>Essentially it is the stream that connects to the terminal. By using <code>#puts</code> we can send data there.</p>
+
+<h4 id="if-we-can-replace-the-io-object-stored-in-stdout-with-an-object-that-can-be-written-to-so-it-stores-the-strings-and-we-can-read-that-data-back-we-can-test-that-the-strings-are-the-correct-ones">If we can replace the IO object stored in <code>$stdout</code> with an object that can be written to (so it stores the strings) and we can read that data back, we can test that the strings are the correct ones!</h4>
+
+<h4 id="this-is-an-approach-to-mocking-stdout-yay">This is an approach to mocking <code>$stdout</code> - Yay!</h4>
+
+<h3 id="_-enter-ruby-stage-left-_">_ Enter Ruby stage left._</h3>
+
+<p>Ruby has an object that&#39;s great for substituting IO objects, because it does exactly what we need: it can be written to and read from.</p>
+
+<h3 id="to-complete-this-challenge-you-will-need-to">To complete this challenge, you will need to:</h3>
+
+<ul>
+<li>[ ] Find a replacement I/O object in ruby&#39;s standard library</li>
+<li>[ ] Discuss with your pair a way to use it</li>
+<li>[ ] Play around with how it works!</li>
+</ul>
+
+<h3 id="further-challenge">Further Challenge</h3>
+
+<ul>
+<li>[ ] Where is #puts defined? Another way to phrase this: which object owns the <code>#puts</code> method?</li>
+</ul>
+
+<h3 id="resources">Resources</h3>
+
+<ul>
+<li><a href="https://www.rubyguides.com/2019/02/ruby-io/">Ruby&#39;s IO</a></li>
+<li><a href="https://www.rubyguides.com/2017/05/stringio-objects/">Ruby&#39;s StringIO</a></li>
+<li><a href="https://ruby-doc.org/core-2.5.3/Method.html">Ruby&#39;s Method class</a></li>
+</ul>
+
+<p><a href="#project-map">Back to project map</a></p>
+
+<p><br/>
+<br/>
+<br/></p>
+
+<h2 id="4-replacing-output">4. Replacing Output</h2>
+
+<h3 id="learning-objectives">Learning Objectives</h3>
+
+<ul>
+<li>[ ] Explain that ruby has a <code>StringIO</code> object that can be used as a pseudo IO object</li>
+</ul>
+
+<h3 id="intro">Intro</h3>
+
+<p>Let&#39;s use <code>StringIO</code>. If we assign the <code>$stdout</code> variable the value of a <code>StringIO</code> instance, we can then write to it using <code>#puts</code>.</p>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #657b83"># in pry</span>
+<span style="color: #93a1a1">&gt;</span> <span style="color: #586e75">replacement_output</span> <span style="color: #93a1a1">=</span> <span style="color: #b58900">StringIO</span><span style="color: #93a1a1">.</span><span style="color: #586e75">new</span>
+<span style="color: #93a1a1">=&gt;</span> <span style="color: #657b83">#&lt;StringIO:0x00007fbc80276868&gt;</span>
+<span style="color: #93a1a1">&gt;</span> <span style="color: #586e75">$stdout</span> <span style="color: #93a1a1">=</span> <span style="color: #586e75">replacement_output</span>
+<span style="color: #93a1a1">=&gt;</span> <span style="color: #657b83">#&lt;StringIO:0x00007fbc80276868&gt;</span>
+
+</code></pre></div>
+<p>Then try the following, either</p>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #93a1a1">&gt;</span> <span style="color: #586e75">puts</span> <span style="color: #859900">'Hi, Pair Partner!'</span>  <span style="color: #657b83"># remember that #puts is called implicitly on the default value stored in $stdout</span>
+</code></pre></div>
+<p>or explicitly either:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #586e75">replacement_output</span><span style="color: #93a1a1">.</span><span style="color: #586e75">puts</span> <span style="color: #859900">'Hi, Pair Partner!'</span>
+<span style="color: #657b83"># or</span>
+<span style="color: #586e75">$stdout</span><span style="color: #93a1a1">.</span><span style="color: #586e75">puts</span> <span style="color: #859900">'Hi, Pair Partner!'</span>
+</code></pre></div>
+<p>Where&#39;s the output gone?!</p>
+
+<h3 id="to-complete-this-challenge-you-will-need-to">To complete this challenge, you will need to:</h3>
+
+<ul>
+<li>[ ] Discuss with your partner what you observe</li>
+<li>[ ] Find where the string has been stored</li>
+<li>[ ] Using pry, see what exactly has been stored and discuss what you see</li>
+</ul>
+
+<h3 id="resources">Resources</h3>
+
+<ul>
+<li><a href="http://ruby-doc.org/stdlib-2.5.0/libdoc/stringio/rdoc/StringIO.html">ruby docs - StringIO</a></li>
+</ul>
+
+<p><a href="#project-map">Back to project map</a></p>
+
+<p><br/>
+<br/>
+<br/></p>
+
+<h2 id="5-testing-output">5. Testing Output</h2>
+
+<h3 id="learning-objectives">Learning Objectives</h3>
+
+<ul>
+<li>[ ] Test output by using a replacement I/O object to capture output</li>
+</ul>
+
+<h3 id="intro">Intro</h3>
+
+<p>You should have seen that nothing was outputting to <code>STDOUT</code>, and therefore nothing showed in the terminal. Instead it&#39;s been written to our replacement IO object and stored there.</p>
+
+<p>Using <code>StringIO#string</code> we can see what&#39;s been stored:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #657b83"># in pry</span>
+<span style="color: #93a1a1">&gt;</span> <span style="color: #586e75">replacement_output</span> <span style="color: #93a1a1">=</span> <span style="color: #b58900">StringIO</span><span style="color: #93a1a1">.</span><span style="color: #586e75">new</span>
+<span style="color: #93a1a1">&gt;</span> <span style="color: #586e75">$stdout</span> <span style="color: #93a1a1">=</span> <span style="color: #586e75">replacement_output</span>
+
+<span style="color: #93a1a1">&gt;</span> <span style="color: #586e75">puts</span> <span style="color: #859900">'Hi, Pair Partner!'</span>
+<span style="color: #93a1a1">&gt;</span> <span style="color: #586e75">replacement_output</span><span style="color: #93a1a1">.</span><span style="color: #586e75">string</span>
+<span style="color: #657b83"># =&gt; 'Hi, Pair Partner!\n'</span>
+</code></pre></div>
+<h3 id="voila-weve-captured-the-output-now-we-can-test-it-more-easily">Voila, we&#39;ve captured the output. Now we can test it more easily!</h3>
+
+<p><em><strong>Discuss:</strong> Where does the new line character come from?</em></p>
+
+<h3 id="example">Example</h3>
+
+<p>Let&#39;s test the <code>Person#greet</code> method:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #6c71c4">class</span> <span style="color: #b58900">Person</span>
+  <span style="color: #6c71c4">def</span> <span style="color: #586e75">greet</span><span style="color: #93a1a1">(</span><span style="color: #586e75">name</span><span style="color: #93a1a1">)</span>
+    <span style="color: #586e75">puts</span> <span style="color: #859900">"Hi, </span><span style="color: #d33682">#{</span><span style="color: #586e75">name</span><span style="color: #d33682">}</span><span style="color: #859900">!"</span>
+  <span style="color: #6c71c4">end</span>
+<span style="color: #6c71c4">end</span>
+</code></pre></div>
+<p>So let&#39;s write a method to help compare two objects and outputs the result to STDOUT:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #657b83"># method to help assert whether an expected outcome is returned</span>
+
+<span style="color: #6c71c4">def</span> <span style="color: #586e75">assert_equals</span><span style="color: #93a1a1">(</span><span style="color: #586e75">obj1</span><span style="color: #93a1a1">,</span> <span style="color: #586e75">obj2</span><span style="color: #93a1a1">)</span>
+  <span style="color: #6c71c4">if</span> <span style="color: #586e75">obj1</span> <span style="color: #93a1a1">==</span> <span style="color: #586e75">obj2</span>
+    <span style="color: #586e75">result</span> <span style="color: #93a1a1">=</span> <span style="color: #859900">"PASSED"</span>
+  <span style="color: #6c71c4">else</span>
+    <span style="color: #586e75">result</span> <span style="color: #93a1a1">=</span> <span style="color: #859900">"FAILED"</span>
+  <span style="color: #6c71c4">end</span>
+
+  <span style="color: #586e75">puts</span> <span style="color: #859900">"TEST </span><span style="color: #d33682">#{</span><span style="color: #586e75">result</span><span style="color: #d33682">}</span><span style="color: #859900">"</span>
+  <span style="color: #586e75">puts</span> <span style="color: #859900">"Expected: </span><span style="color: #d33682">#{</span><span style="color: #586e75">obj2</span><span style="color: #93a1a1">.</span><span style="color: #586e75">inspect</span><span style="color: #d33682">}</span><span style="color: #859900">"</span>
+  <span style="color: #586e75">puts</span> <span style="color: #859900">"Got: </span><span style="color: #d33682">#{</span><span style="color: #586e75">obj1</span><span style="color: #93a1a1">.</span><span style="color: #586e75">inspect</span><span style="color: #d33682">}</span><span style="color: #859900">"</span>
+<span style="color: #6c71c4">end</span>
+</code></pre></div>
+<p>Then let&#39;s write a test, according to the first 3 of 4 stages of testing: (See resources below)</p>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #657b83">#1. Set up</span>
+<span style="color: #586e75">person</span> <span style="color: #93a1a1">=</span> <span style="color: #b58900">Person</span><span style="color: #93a1a1">.</span><span style="color: #586e75">new</span>
+
+<span style="color: #657b83">#2. Execute</span>
+<span style="color: #586e75">result</span> <span style="color: #93a1a1">=</span> <span style="color: #586e75">person</span><span style="color: #93a1a1">.</span><span style="color: #586e75">greet</span><span style="color: #93a1a1">(</span><span style="color: #859900">'Edward'</span><span style="color: #93a1a1">)</span>
+
+<span style="color: #657b83">#3. Verify</span>
+<span style="color: #586e75">assert_equals</span><span style="color: #93a1a1">(</span><span style="color: #586e75">result</span><span style="color: #93a1a1">,</span> <span style="color: #859900">"Hi, Edward!</span><span style="color: #d33682">\n</span><span style="color: #859900">"</span><span style="color: #93a1a1">)</span>
+
+<span style="color: #657b83"># TEST FAILED</span>
+<span style="color: #657b83"># Expected: "Hi, Edward!\n"</span>
+<span style="color: #657b83"># Got: nil</span>
+<span style="color: #657b83"># =&gt; nil</span>
+</code></pre></div>
+<p>If we run it now, we haven&#39;t captured the output so <code>person.greet(&#39;Edward&#39;)</code> outputs to STDOUT, returns <code>nil</code>, which then is compared with the expectation and fails the test.</p>
+
+<p>Run it and see.</p>
+
+<hr>
+
+<p>Now, let&#39;s capture the output.</p>
+
+<p>The <code>#greet</code> method is using <code>#puts</code>, so we need to replace the default IO object that is stored in the global variable <code>$stdout</code> with our own:</p>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #657b83">#1. Set up</span>
+<span style="color: #586e75">person</span> <span style="color: #93a1a1">=</span> <span style="color: #b58900">Person</span><span style="color: #93a1a1">.</span><span style="color: #586e75">new</span>
+<span style="color: #586e75">output</span> <span style="color: #93a1a1">=</span> <span style="color: #b58900">StringIO</span><span style="color: #93a1a1">.</span><span style="color: #586e75">new</span>
+<span style="color: #586e75">$stdout</span> <span style="color: #93a1a1">=</span> <span style="color: #586e75">output</span>
+
+<span style="color: #657b83">#2. Execute</span>
+<span style="color: #586e75">person</span><span style="color: #93a1a1">.</span><span style="color: #586e75">greet</span><span style="color: #93a1a1">(</span><span style="color: #859900">'Edward'</span><span style="color: #93a1a1">)</span>
+
+<span style="color: #657b83">#3. Verify</span>
+<span style="color: #586e75">assert_equals</span><span style="color: #93a1a1">(</span><span style="color: #586e75">output</span><span style="color: #93a1a1">.</span><span style="color: #586e75">string</span><span style="color: #93a1a1">,</span> <span style="color: #859900">"Hi, Edward!</span><span style="color: #d33682">\n</span><span style="color: #859900">"</span><span style="color: #93a1a1">)</span>
+
+<span style="color: #657b83">#  =&gt; nil</span>
+</code></pre></div>
+<p>What happens when we run it? Nothing gets output? It all just returns <code>nil?</code></p>
+
+<p><strong>Instruction:</strong> Have a look at the output variable and see what strings have been appended to it. What does this mean?</p>
+
+<p>Let&#39;s be precise and only replace the default value for <code>#puts</code> when our application code is being run, and revert back to the default for out test helper method.</p>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #657b83">#1. Set up</span>
+<span style="color: #586e75">person</span> <span style="color: #93a1a1">=</span> <span style="color: #b58900">Person</span><span style="color: #93a1a1">.</span><span style="color: #586e75">new</span>
+<span style="color: #586e75">output</span> <span style="color: #93a1a1">=</span> <span style="color: #b58900">StringIO</span><span style="color: #93a1a1">.</span><span style="color: #586e75">new</span> <span style="color: #657b83">#(intending to replace output)</span>
+<span style="color: #586e75">$stdout</span> <span style="color: #93a1a1">=</span> <span style="color: #586e75">output</span>
+
+<span style="color: #657b83">#2. Execute</span>
+<span style="color: #586e75">person</span><span style="color: #93a1a1">.</span><span style="color: #586e75">greet</span><span style="color: #93a1a1">(</span><span style="color: #859900">'Edward'</span><span style="color: #93a1a1">)</span>
+
+<span style="color: #657b83">#3. Verify</span>
+<span style="color: #586e75">$stdout</span> <span style="color: #93a1a1">=</span> <span style="color: #b58900">STDOUT</span>
+<span style="color: #586e75">assert_equals</span><span style="color: #93a1a1">(</span><span style="color: #586e75">output</span><span style="color: #93a1a1">.</span><span style="color: #586e75">string</span><span style="color: #93a1a1">,</span> <span style="color: #859900">"Hi, Edward!</span><span style="color: #d33682">\n</span><span style="color: #859900">"</span><span style="color: #93a1a1">)</span>
+
+<span style="color: #657b83"># TEST PASSED</span>
+<span style="color: #657b83"># Expected: "Hi, Edward!\n"</span>
+<span style="color: #657b83"># Got: "Hi, Edward!\n"</span>
+<span style="color: #657b83"># =&gt; nil</span>
+</code></pre></div>
+<p>:smiley:</p>
+
+<h3 id="to-complete-this-challenge-you-will-need-to">To complete this challenge, you will need to:</h3>
+
+<ul>
+<li>[ ] Repeat the above exercises from scratch</li>
+<li>[ ] Refactor your code, so you don&#39;t have to manually set and reset <code>$stdout</code></li>
+<li>[ ] With your pair partner, create some new, similar little methods for <code>Person</code> that use #puts and #print and test them</li>
+</ul>
+
+<h3 id="resources">Resources</h3>
+
+<ul>
+<li><a href="https://robots.thoughtbot.com/four-phase-test">thoughtbot - four phase testing</a></li>
+</ul>
+
+<p><a href="#project-map">Back to project map</a></p>
+
+<p><br/>
+<br/>
+<br/></p>
+
+<h2 id="6-refactoring-step">6. Refactoring Step</h2>
+
+<h3 id="learning-objectives">Learning Objectives</h3>
+
+<ul>
+<li>[ ] Use blocks and yield</li>
+</ul>
+
+<h3 id="intro">Intro</h3>
+
+<p>Let&#39;s refactor the way we are testing so we don&#39;t have to manually set and reset <code>$stdout</code> for each output test. All methods can be optionally passed a block of code in ruby and we can use the keyword <code>yield</code> or optionally <code>block.call</code> to run the block of code when we want to. It&#39;s worth playing around in pry.</p>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #6c71c4">def</span> <span style="color: #586e75">replace_stdout_with</span><span style="color: #93a1a1">(</span><span style="color: #586e75">replacement</span><span style="color: #93a1a1">,</span> <span style="color: #93a1a1">&amp;</span><span style="color: #586e75">block</span><span style="color: #93a1a1">)</span>
+  <span style="color: #586e75">$stdout</span> <span style="color: #93a1a1">=</span> <span style="color: #586e75">replacement</span>
+
+  <span style="color: #6c71c4">yield</span>
+
+  <span style="color: #586e75">$stdout</span> <span style="color: #93a1a1">=</span> <span style="color: #b58900">STDOUT</span>
+<span style="color: #6c71c4">end</span>
+</code></pre></div><div class="highlight"><pre class="highlight ruby"><code><span style="color: #657b83">#1. Setup</span>
+<span style="color: #586e75">person</span> <span style="color: #93a1a1">=</span> <span style="color: #b58900">Person</span><span style="color: #93a1a1">.</span><span style="color: #586e75">new</span>
+<span style="color: #586e75">output</span> <span style="color: #93a1a1">=</span> <span style="color: #b58900">StringIO</span><span style="color: #93a1a1">.</span><span style="color: #586e75">new</span>
+
+<span style="color: #657b83">#2. Execute</span>
+<span style="color: #586e75">replace_stdout_with</span><span style="color: #93a1a1">(</span><span style="color: #586e75">output</span><span style="color: #93a1a1">)</span> <span style="color: #6c71c4">do</span>
+  <span style="color: #586e75">person</span><span style="color: #93a1a1">.</span><span style="color: #586e75">greet</span><span style="color: #93a1a1">(</span><span style="color: #859900">'Edward'</span><span style="color: #93a1a1">)</span>
+<span style="color: #6c71c4">end</span>
+
+<span style="color: #657b83">#3. Verify</span>
+<span style="color: #586e75">assert_equals</span><span style="color: #93a1a1">(</span><span style="color: #586e75">output</span><span style="color: #93a1a1">.</span><span style="color: #586e75">string</span><span style="color: #93a1a1">,</span> <span style="color: #859900">"Hi, Edward!</span><span style="color: #d33682">\n</span><span style="color: #859900">"</span><span style="color: #93a1a1">)</span>
+
+<span style="color: #657b83"># TEST PASSED</span>
+<span style="color: #657b83"># Expected: "Hi, Edward!\n"</span>
+<span style="color: #657b83"># Got: "Hi, Edward!\n"</span>
+</code></pre></div>
+<p>Nice. You&#39;ve successfully isolated your dependency and found a way to inject it, allowing you to test your code more easily using a mock. :boom:</p>
+
+<h3 id="to-complete-this-challenge-you-will-need-to">To complete this challenge, you will need to:</h3>
+
+<ul>
+<li>[ ] Repeat the above exercises from scratch</li>
+<li>[ ] Reflect with your pair partner what you&#39;ve learned</li>
+<li>[ ] How <a href="https://www.researchgate.net/publication/220807320_Student_self-assessment_in_a_programming_course_using_bloom's_revised_taxonomy">can you test</a> that you&#39;ve learned it?</li>
+</ul>
+
+<h3 id="further-work">Further work</h3>
+
+<ul>
+<li>[ ] Using <code>StringIO</code> to figure out a way to test <code>#gets</code></li>
+<li>[ ] Instead of using <code>StringIO</code>, write your own class that implements the same interface - you&#39;ll know it works when you can use it instead of StringIO in the above example</li>
+</ul>
+
+<p><a href="#project-map">Back to project map</a></p>
+
+<p><br/>
+<br/>
+<br/></p>
+
+<h3 id="feedback">Feedback</h3>
+
+<h4 id="if-you-got-here-thats-amazing">If you got here - that&#39;s amazing!</h4>
+
+<p>I&#39;m keen to know any/all of the following - I&#39;ll read everything.</p>
+
+<ul>
+<li>did you achieve the <a href="#project-goals">project goal</a>?</li>
+<li>the sub goals? Which ones?</li>
+<li>what did you like about this inquiry project?</li>
+<li>what did you find most useful in how you progressed through the project?</li>
+<li>what did you find most difficult?</li>
+<li>any other thoughts you have!</li>
+</ul>
+
+<p>Leave a comment below or shoot me an email at <a href="mailto:edwardawithers@gmail.com">edwardawithers@gmail.com</a></p>
+
+
+        <div id="article-comments">
+  <div id="article-comments-list">
+    <p>-----</p>
+  </div>
+</div>
+
+<script type="text/javascript">
+  let element = $('#article-comments-list')
+  new GithubCommentList(element, 13)
+</script>
+
+    </article>
+  </div>
+
+    </div>
+  </body>
+</html>

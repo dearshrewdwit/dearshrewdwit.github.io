@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="/images/profile_pic.ico" rel="icon" type="image/ico" />
+    <link href="/stylesheets/homepage.css" rel="stylesheet" />
+    <link href="/stylesheets/blog.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet" />
+
+    <script src="/javascripts/site.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <!-- Use the title from a page's frontmatter if it has one -->
+    <title>Reimplementing classes in ruby</title>
+  </head>
+  <body>
+    <div class="page-content">
+        <div class="blog-page-content">
+    <header>
+      <h3><a href="/" class="author-name title-link">Edward Withers</a></h3>
+
+
+      <header class="navigation-links">
+        <span id="desktop-only">
+          <a href="/" class="nav-link">About</a>
+          <a href="/blog" class="nav-link">Blog</a>
+          <a href="/blog/archive" class="nav-link">All posts</a>
+          <a href="/blog/feed.xml" class="nav-link">RSS</a>
+        </span>
+      </header>
+    </header>
+
+    <article class="article-content">
+        <h1>Jun 12 2019: Reimplementing classes in ruby</h1>
+
+      <hr>
+
+<p>A short challenge to reimplement the class keyword in ruby.</p>
+
+<p>I used <code>Kernel#binding</code> to set scope.</p>
+
+<p>Have a look <a href="https://gist.github.com/dearshrewdwit/8ce0da6f1b1a52fb700f66263240047e">here</a> for the gist.</p>
+
+<p>Pretty, huh?</p>
+
+<hr>
+<div class="highlight"><pre class="highlight ruby"><code><span style="color: #6c71c4">module</span> <span style="color: #b58900">BasicClass</span>
+  <span style="color: #6c71c4">def</span> <span style="color: #b58900">self</span><span style="color: #93a1a1">.</span><span style="color: #586e75">new</span><span style="color: #93a1a1">(</span><span style="color: #586e75">parent_klass</span> <span style="color: #93a1a1">=</span> <span style="color: #6c71c4">nil</span><span style="color: #93a1a1">,</span> <span style="color: #93a1a1">&amp;</span><span style="color: #586e75">block</span><span style="color: #93a1a1">)</span>
+    <span style="color: #586e75">klass</span> <span style="color: #93a1a1">=</span> <span style="color: #586e75">lambda</span> <span style="color: #6c71c4">do</span>
+      <span style="color: #586e75">class_scope</span> <span style="color: #93a1a1">=</span> <span style="color: #93a1a1">{</span>
+        <span style="color: #859900">ancestry: </span><span style="color: #93a1a1">[</span><span style="color: #586e75">klass</span><span style="color: #93a1a1">,</span> <span style="color: #586e75">self</span><span style="color: #93a1a1">],</span>
+        <span style="color: #859900">instance_methods: </span><span style="color: #93a1a1">{},</span>
+        <span style="color: #859900">methods: </span><span style="color: #93a1a1">{</span>
+          <span style="color: #859900">define: </span><span style="color: #586e75">lambda</span> <span style="color: #93a1a1">{</span> <span style="color: #93a1a1">|</span><span style="color: #586e75">name</span><span style="color: #93a1a1">,</span> <span style="color: #93a1a1">&amp;</span><span style="color: #586e75">block</span><span style="color: #93a1a1">|</span> <span style="color: #586e75">class_scope</span><span style="color: #93a1a1">[</span><span style="color: #859900">:instance_methods</span><span style="color: #93a1a1">][</span><span style="color: #586e75">name</span><span style="color: #93a1a1">]</span> <span style="color: #93a1a1">=</span> <span style="color: #586e75">block</span> <span style="color: #93a1a1">},</span>
+          <span style="color: #859900">new: </span><span style="color: #586e75">lambda</span> <span style="color: #6c71c4">do</span> <span style="color: #93a1a1">|*</span><span style="color: #586e75">args</span><span style="color: #93a1a1">|</span>
+            <span style="color: #586e75">instance</span> <span style="color: #93a1a1">=</span> <span style="color: #586e75">lambda</span> <span style="color: #6c71c4">do</span>
+              <span style="color: #586e75">instance_scope</span> <span style="color: #93a1a1">=</span> <span style="color: #93a1a1">{</span>
+                <span style="color: #859900">class_methods: </span><span style="color: #586e75">class_scope</span><span style="color: #93a1a1">[</span><span style="color: #859900">:methods</span><span style="color: #93a1a1">].</span><span style="color: #586e75">dup</span><span style="color: #93a1a1">,</span>
+                <span style="color: #859900">methods: </span><span style="color: #586e75">class_scope</span><span style="color: #93a1a1">[</span><span style="color: #859900">:instance_methods</span><span style="color: #93a1a1">].</span><span style="color: #586e75">dup</span><span style="color: #93a1a1">,</span>
+                <span style="color: #859900">instance_vars: </span><span style="color: #93a1a1">{}</span>
+              <span style="color: #93a1a1">}</span>
+              <span style="color: #586e75">instance_scope</span><span style="color: #93a1a1">[</span><span style="color: #859900">:methods</span><span style="color: #93a1a1">][</span><span style="color: #859900">:initialize</span><span style="color: #93a1a1">].</span><span style="color: #586e75">call</span><span style="color: #93a1a1">(</span><span style="color: #586e75">instance_scope</span><span style="color: #93a1a1">,</span> <span style="color: #93a1a1">*</span><span style="color: #586e75">args</span><span style="color: #93a1a1">)</span>
+              <span style="color: #586e75">binding</span>
+            <span style="color: #6c71c4">end</span>
+            <span style="color: #586e75">instance_scope</span> <span style="color: #93a1a1">=</span> <span style="color: #586e75">instance</span><span style="color: #93a1a1">.</span><span style="color: #586e75">call</span><span style="color: #93a1a1">.</span><span style="color: #586e75">local_variable_get</span><span style="color: #93a1a1">(</span><span style="color: #859900">'instance_scope'</span><span style="color: #93a1a1">)</span>
+            <span style="color: #586e75">instance</span>
+          <span style="color: #6c71c4">end</span>
+        <span style="color: #93a1a1">},</span>
+      <span style="color: #93a1a1">}</span>
+      <span style="color: #586e75">class_scope</span>
+    <span style="color: #6c71c4">end</span>
+    <span style="color: #586e75">class_scope</span> <span style="color: #93a1a1">=</span> <span style="color: #586e75">klass</span><span style="color: #93a1a1">.</span><span style="color: #586e75">call</span>
+    <span style="color: #586e75">block</span><span style="color: #93a1a1">.</span><span style="color: #586e75">call</span><span style="color: #93a1a1">(</span><span style="color: #586e75">class_scope</span><span style="color: #93a1a1">)</span>
+    <span style="color: #586e75">klass</span>
+  <span style="color: #6c71c4">end</span>
+<span style="color: #6c71c4">end</span>
+
+<span style="color: #b58900">DockingStation</span> <span style="color: #93a1a1">=</span> <span style="color: #b58900">BasicClass</span><span style="color: #93a1a1">.</span><span style="color: #586e75">new</span> <span style="color: #6c71c4">do</span> <span style="color: #93a1a1">|</span><span style="color: #586e75">class_scope</span><span style="color: #93a1a1">|</span>
+  <span style="color: #586e75">class_scope</span><span style="color: #93a1a1">[</span><span style="color: #859900">:methods</span><span style="color: #93a1a1">][</span><span style="color: #859900">:define</span><span style="color: #93a1a1">].</span><span style="color: #586e75">call</span><span style="color: #93a1a1">(</span><span style="color: #859900">:initialize</span><span style="color: #93a1a1">)</span> <span style="color: #6c71c4">do</span> <span style="color: #93a1a1">|</span><span style="color: #586e75">instance_scope</span><span style="color: #93a1a1">,</span> <span style="color: #586e75">capacity</span><span style="color: #93a1a1">=</span><span style="color: #859900">20</span><span style="color: #93a1a1">|</span>
+    <span style="color: #586e75">instance_scope</span><span style="color: #93a1a1">[</span><span style="color: #859900">:instance_vars</span><span style="color: #93a1a1">][</span><span style="color: #859900">'@capacity'</span><span style="color: #93a1a1">]</span> <span style="color: #93a1a1">=</span> <span style="color: #586e75">capacity</span>
+    <span style="color: #586e75">instance_scope</span><span style="color: #93a1a1">[</span><span style="color: #859900">:instance_vars</span><span style="color: #93a1a1">][</span><span style="color: #859900">'@bikes'</span><span style="color: #93a1a1">]</span> <span style="color: #93a1a1">=</span> <span style="color: #93a1a1">[]</span>
+  <span style="color: #6c71c4">end</span>
+
+  <span style="color: #586e75">class_scope</span><span style="color: #93a1a1">[</span><span style="color: #859900">:methods</span><span style="color: #93a1a1">][</span><span style="color: #859900">:define</span><span style="color: #93a1a1">].</span><span style="color: #586e75">call</span><span style="color: #93a1a1">(</span><span style="color: #859900">:bikes</span><span style="color: #93a1a1">)</span> <span style="color: #6c71c4">do</span> <span style="color: #93a1a1">|</span><span style="color: #586e75">instance_scope</span><span style="color: #93a1a1">|</span>
+    <span style="color: #586e75">instance_scope</span><span style="color: #93a1a1">[</span><span style="color: #859900">:instance_vars</span><span style="color: #93a1a1">][</span><span style="color: #859900">'@bikes'</span><span style="color: #93a1a1">]</span>
+  <span style="color: #6c71c4">end</span>
+
+  <span style="color: #586e75">class_scope</span><span style="color: #93a1a1">[</span><span style="color: #859900">:methods</span><span style="color: #93a1a1">][</span><span style="color: #859900">:define</span><span style="color: #93a1a1">].</span><span style="color: #586e75">call</span><span style="color: #93a1a1">(</span><span style="color: #859900">:dock</span><span style="color: #93a1a1">)</span> <span style="color: #6c71c4">do</span> <span style="color: #93a1a1">|</span><span style="color: #586e75">instance_scope</span><span style="color: #93a1a1">,</span> <span style="color: #586e75">bike</span><span style="color: #93a1a1">|</span>
+    <span style="color: #586e75">instance_scope</span><span style="color: #93a1a1">[</span><span style="color: #859900">:instance_vars</span><span style="color: #93a1a1">][</span><span style="color: #859900">'@bikes'</span><span style="color: #93a1a1">]</span> <span style="color: #93a1a1">&lt;&lt;</span> <span style="color: #586e75">bike</span>
+  <span style="color: #6c71c4">end</span>
+
+  <span style="color: #586e75">class_scope</span><span style="color: #93a1a1">[</span><span style="color: #859900">:methods</span><span style="color: #93a1a1">][</span><span style="color: #859900">:define</span><span style="color: #93a1a1">].</span><span style="color: #586e75">call</span><span style="color: #93a1a1">(</span><span style="color: #859900">:release_bike</span><span style="color: #93a1a1">)</span> <span style="color: #6c71c4">do</span> <span style="color: #93a1a1">|</span><span style="color: #586e75">instance_scope</span><span style="color: #93a1a1">|</span>
+    <span style="color: #586e75">instance_scope</span><span style="color: #93a1a1">[</span><span style="color: #859900">:instance_vars</span><span style="color: #93a1a1">][</span><span style="color: #859900">'@bikes'</span><span style="color: #93a1a1">].</span><span style="color: #586e75">pop</span>
+  <span style="color: #6c71c4">end</span>
+<span style="color: #6c71c4">end</span>
+</code></pre></div>
+
+        <div id="article-comments">
+  <div id="article-comments-list">
+    <p>-----</p>
+  </div>
+</div>
+
+<script type="text/javascript">
+  let element = $('#article-comments-list')
+  new GithubCommentList(element, 11)
+</script>
+
+    </article>
+  </div>
+
+    </div>
+  </body>
+</html>
