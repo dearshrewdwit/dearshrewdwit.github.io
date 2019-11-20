@@ -1,12 +1,26 @@
+require 'redcarpet'
+
 activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"
 end
+
+# activate syntax highlighting
+activate :syntax, :inline_theme => Rouge::Themes::Base16::Solarized.new
+
+# set markdown flavour
+set :markdown_engine, :redcarpet
+set :markdown,
+  tables:true,
+  autolink:true,
+  gh_blockcode: true,
+  fenced_code_blocks: true,
+  with_toc_data: true
 
 # Loads js
 activate :sprockets
 
 # Reloads changes for dev
-activate :livereload
+activate :livereload, :host => "127.0.0.1"
 
 # Pretty URLs
 activate :directory_indexes
@@ -33,6 +47,9 @@ page '/404.html', directory_index: false
 set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 set :images_dir, 'images'
+
+# Set available variables
+set :my_email, "edwardawithers@gmail.com"
 
 # Build config
 configure :build do

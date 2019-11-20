@@ -24,6 +24,18 @@
   font-size: 0.8em;
 }
 
+.highlight {
+  margin: 1em;
+}
+
+.article-sequence-step-end {
+  margin-top: 5em;
+}
+
+h3 {
+  margin-top: 2em;
+}
+
 @media handheld, only screen and (max-width: 767px) {
   body {
     font-family: "Gill Sans WGL W01 Light";

@@ -1,0 +1,600 @@
+---
+title: An experiment to learn about mocking by testing stdout in Ruby
+author: dearshrewdwit
+date: 2019-11-20
+gh_issue_number: 13
+---
+
+---
+
+<br/>
+<br/>
+
+# Inquiry Projects
+
+Inquiry Projects, a term borrowed from [M Knowles](https://eric.ed.gov/?id=ED114653), are designed by learners to provide opportunities to dive deeper into knowledge, practice uncovering areas of ignorances, and identify improvements to your approach to learning.
+
+### Project Structure
+This is a structured project. Objectives have been set, steps identified, and some resources shared.
+
+Each step of this project has
+
+- a set of learning objectives to measure your progress against
+- an intro to give context
+- instructions to guide learning
+- recommended resources
+- a link to jump back to the project map below.
+
+However, I warmly encourage you to push beyond the structure and see where your exploration takes you! Identify and use more resources, add in your own objectives and steps. Learning is most fun and rewarding when it's playtime, fun, and allowed to run free!
+
+Remember: have fun!
+
+### If you get stuck
+- Leave a [well-explained](https://stackoverflow.com/help/how-to-ask) comment and someone will respond!
+- Find someone to explain your problem to
+- Find an expert to help you.
+- Take a break, have a nap, muse on life.
+
+### Experiments need feedback
+
+I need your thoughts! As you progress through this project, whenever you feel like it, scroll down right to the bottom or [jump](#feedback) there to leave feedback.
+
+<br/>
+<br/>
+<br/>
+
+## Inquiry Project: testing #puts (in plain ruby)
+
+<br/>
+
+```ruby
+ puts "let's explore!" # whoaah, hold. up. how does #puts actually work
+```
+
+<br/>
+
+Let's learn about mocking, by diving into how to test `#puts` in ruby!
+
+### Project Goals
+
+#### Main goal: Explain why replacing dependencies with test objects helps you test code
+
+Subgoals:
+
+- Explain how `#puts` works
+- Use plain ruby to test output to STDOUT
+- Use `pry` to get visibility on how your code executes
+- Use blocks and `yield`
+
+### Prerequisites
+
+- [install pry](https://github.com/pry/pry/#installation)
+  - `irb` clumsily sends [_all_ expressions](https://ruby-doc.org/stdlib-2.6.5/libdoc/pry/rdoc/pry/Notifier.html) to STDOUT, whereas `pry` doesn't.
+  - It's got nice colours too. And secretly it's far more powerful than you know!
+
+### Project Map
+Use these links to jump to different steps:
+
+- [what is puts doing - part1](#1-what-does-puts-do?)
+- [what is puts doing - part2](#2-what-does-puts-do-continued)
+- [what is puts doing - part3](#3-what-does-puts-do-continued)
+- [replacing output](#4-replacing-output)
+- [testing output](#5-testing-output)
+- [refactoring step](#6-refactoring-step)
+
+[Back to top](#inquiry-projects)
+
+<br/>
+<br/>
+<br/>
+
+## 1. What does #puts do?
+
+<br/>
+
+```
+"The most effective debugging tool is still careful thought, coupled with judiciously placed print statements."
+
+— Brian Kernighan, "Unix for Beginners" (1979)
+```
+
+### Learning Objectives
+- explain what happens when you call `#puts`
+- use `pry` to explore and gain visibility
+
+### Intro
+
+Start a `pry` session and load this code snippet (require a file which has this contents, or copy the code straight into `pry`)
+
+```ruby
+QUESTIONS = [
+  'What is the capital of France?',
+  'What is the capital of Italy?'
+]
+
+def run
+  QUESTIONS.each do |question|
+    puts question
+  end
+end
+```
+
+Make a hypothesis what will happen when you call the `#run` method.
+
+- What's the output?
+- What's returned?
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+Scroll down!
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+Now call `#run` in `pry`.
+
+**Discuss:** What happened - did it meet your hypothesis?
+
+<br/>
+
+You may have got something like:
+
+```sh
+# in pry
+> run # call the method #run
+What is the capital of France?
+What is the capital of Italy?
+=> ["What is the capital of France?", "What is the capital of Italy?"]
+```
+
+<br/>
+
+Using the above example, in **pseudocode** perhaps a test that codifies the expected behaviour could look something like:
+
+`when I call #run, it outputs 'What is the capital of France? What is the capital of Italy?'`
+
+Which perhaps could be transliterated like this in ruby:
+
+```ruby
+run == 'What is the capital of France?What is the capital of Italy?'
+# we expect that this evaluates to true if the #run method is written correctly
+```
+
+Try this in your `pry` session. What happens?
+
+Probably something like this:
+
+```sh
+> run == 'What is the capital of France?What is the capital of Italy?'
+What is the capital of France?
+What is the capital of Italy?
+ => false
+
+```
+
+It's not doing what you want because `#puts` returns `nil`:
+
+```sh
+> puts "a string"
+a string # output
+=> nil # return value
+
+# so clearly this won't work because nil != "a string"
+> puts "a string"  == "a string"
+a string # output
+=> false # return value
+```
+
+Every time we call the method `#puts` in our application code we're sending data to the terminal (this is [helpful](https://stackoverflow.com/questions/189562/what-is-the-proper-name-for-doing-debugging-by-adding-print-statements)) and then it returns `nil`.
+
+If we can understand more about how `#puts` works, then we can find a way to capture the strings passed to it so we can test that they are correct.
+
+### To complete this challenge, play around with the following:
+ - [ ] Open up  `pry`
+ - [ ] Create an empty `Cat` class.
+ - [ ] Create a `Cat` instance and call `#to_s` on it.
+    - Then `puts(cat)`, where cat is your instance.
+ - [ ] Create an `Iguana` class and define your own `#to_s` instance method that returns a string.
+ - [ ] Create an `Iguana`instance and call `#to_s` on it.
+    - Then `puts(iguana)` where iguana is your instance.
+ - [ ] **Discuss** what you observe
+
+### Further inquiry
+ - [ ] Explain the difference between `#print`, `#puts`, `#p`
+ - [ ] Explore using ruby's docs how one of the above methods works.
+
+### Resources
+
+ - [Rubyguides - difference in print, puts, p](https://www.rubyguides.com/2018/10/puts-vs-print/)
+
+[Back to project map](#project-map)
+
+<br/>
+<br/>
+<br/>
+
+## 2. What does #puts do - continued
+
+### Learning Objectives
+- explain what happens when you call `#puts`
+
+### Intro
+You maybe tried something along the lines of:
+
+```ruby
+class Cat
+
+end
+
+# in pry
+> Cat.new.to_s
+# => "#<Cat:0x00007f8d458e1988>"
+
+> puts Cat.new
+# <Cat:0x00007fe42a9676f0>
+# => nil
+```
+
+```ruby
+class Iguana
+  def to_s
+    "Roar, I'm a tiny dragon!"
+  end
+end
+
+# in pry
+> Iguana.new.to_s
+# => "Roar, I'm a tiny dragon!"
+
+> puts Iguana.new
+# Roar, I'm a tiny dragon!
+# => nil
+```
+
+It uses the [hierarchy of method lookups](https://gist.github.com/damien-roche/351bf4e7991449714533) to find a `#to_s` method
+, calls it, and then somehow it pops up in the terminal.
+
+So before `#puts` sends data to your terminal it tries to find a string respresentation of its argument(s). Easy enough when you're calling `#puts` with strings - but you can pass it any type, and it will try and convert it to a String.
+
+But then how does this data appear in your terminal?
+
+### To complete this challenge, you will need to:
+ - [ ] Explain in simple terms
+    - what connects `#puts` with the terminal
+    - what Input and Output are in ruby
+
+### Resources
+
+- [thoughtbot - I/O in ruby](https://robots.thoughtbot.com/io-in-ruby)
+- [ruby docs - IO](http://ruby-doc.org/core-2.2.2/IO.html)
+
+[Back to project map](#project-map)
+
+<br/>
+<br/>
+<br/>
+
+## 3. What does #puts do - continued
+
+### Learning Objectives
+- [ ] Explain that a ruby object connects to the STDOUT stream
+
+### Intro
+
+So what is the object being written to with the `#puts` method? What connects the `#puts` with the terminal where the result is shown? How does this help us test when using `#puts` ?
+
+Have a look at the following. Run them in `pry`:
+
+```ruby
+$stdout.puts('hello')
+```
+or
+
+```ruby
+STDOUT.puts('hello')
+```
+
+What is stored in both the variable and constant?
+
+Explore what they return:
+
+```sh
+> $stdout
+=> #<IO:<STDOUT>>
+> STDOUT
+=> #<IO:<STDOUT>>
+```
+
+### The IO class
+Ruby IO objects wrap Input/Output streams.
+
+The constants `STDIN`, `STDOUT`, and `STDERR` point to IO objects wrapping the standard streams, which themselves are files on your machine. By default the global variables `$stdin`, `$stdout`, and `$stderr` point to their respective constants. While the constants should always point to the default streams, **the globals can be overwritten to point to another I/O stream such as a file, socket, or any oject that implements the same read/write interface. IO objects can be written to via puts and print**.
+
+
+Essentially it is the stream that connects to the terminal. By using `#puts` we can send data there.
+
+#### If we can replace the IO object stored in `$stdout` with an object that can be written to (so it stores the strings) and we can read that data back, we can test that the strings are the correct ones!
+#### This is an approach to mocking `$stdout` - Yay!
+
+### _ Enter Ruby stage left._
+
+Ruby has an object that's great for substituting IO objects, because it does exactly what we need: it can be written to and read from.
+
+### To complete this challenge, you will need to:
+ - [ ] Find a replacement I/O object in ruby's standard library
+ - [ ] Discuss with your pair a way to use it
+ - [ ] Play around with how it works!
+
+### Further Challenge
+ - [ ] Where is #puts defined? Another way to phrase this: which object owns the `#puts` method?
+
+### Resources
+ - [Ruby's IO](https://www.rubyguides.com/2019/02/ruby-io/)
+ - [Ruby's StringIO](https://www.rubyguides.com/2017/05/stringio-objects/)
+ - [Ruby's Method class](https://ruby-doc.org/core-2.5.3/Method.html)
+
+[Back to project map](#project-map)
+
+<br/>
+<br/>
+<br/>
+
+## 4. Replacing Output
+
+### Learning Objectives
+- [ ] Explain that ruby has a `StringIO` object that can be used as a pseudo IO object
+
+### Intro
+
+Let's use `StringIO`. If we assign the `$stdout` variable the value of a `StringIO` instance, we can then write to it using `#puts`.
+
+```ruby
+# in pry
+> replacement_output = StringIO.new
+=> #<StringIO:0x00007fbc80276868>
+> $stdout = replacement_output
+=> #<StringIO:0x00007fbc80276868>
+
+```
+
+Then try the following, either
+
+```ruby
+> puts 'Hi, Pair Partner!'  # remember that #puts is called implicitly on the default value stored in $stdout
+```
+
+or explicitly either:
+
+```ruby
+replacement_output.puts 'Hi, Pair Partner!'
+# or
+$stdout.puts 'Hi, Pair Partner!'
+```
+
+Where's the output gone?!
+
+### To complete this challenge, you will need to:
+
+- [ ] Discuss with your partner what you observe
+- [ ] Find where the string has been stored
+- [ ] Using pry, see what exactly has been stored and discuss what you see
+
+### Resources
+
+- [ruby docs - StringIO](http://ruby-doc.org/stdlib-2.5.0/libdoc/stringio/rdoc/StringIO.html)
+
+[Back to project map](#project-map)
+
+<br/>
+<br/>
+<br/>
+
+## 5. Testing Output
+
+### Learning Objectives
+- [ ] Test output by using a replacement I/O object to capture output
+
+### Intro
+
+You should have seen that nothing was outputting to `STDOUT`, and therefore nothing showed in the terminal. Instead it's been written to our replacement IO object and stored there.
+
+Using `StringIO#string` we can see what's been stored:
+
+```ruby
+# in pry
+> replacement_output = StringIO.new
+> $stdout = replacement_output
+
+> puts 'Hi, Pair Partner!'
+> replacement_output.string
+# => 'Hi, Pair Partner!\n'
+```
+### Voila, we've captured the output. Now we can test it more easily!
+
+_**Discuss:** Where does the new line character come from?_
+
+### Example
+Let's test the `Person#greet` method:
+
+```ruby
+class Person
+  def greet(name)
+    puts "Hi, #{name}!"
+  end
+end
+```
+
+So let's write a method to help compare two objects and outputs the result to STDOUT:
+
+```ruby
+# method to help assert whether an expected outcome is returned
+
+def assert_equals(obj1, obj2)
+  if obj1 == obj2
+    result = "PASSED"
+  else
+    result = "FAILED"
+  end
+
+  puts "TEST #{result}"
+  puts "Expected: #{obj2.inspect}"
+  puts "Got: #{obj1.inspect}"
+end
+```
+
+Then let's write a test, according to the first 3 of 4 stages of testing: (See resources below)
+
+```ruby
+#1. Set up
+person = Person.new
+
+#2. Execute
+result = person.greet('Edward')
+
+#3. Verify
+assert_equals(result, "Hi, Edward!\n")
+
+# TEST FAILED
+# Expected: "Hi, Edward!\n"
+# Got: nil
+# => nil
+```
+
+If we run it now, we haven't captured the output so `person.greet('Edward')` outputs to STDOUT, returns `nil`, which then is compared with the expectation and fails the test.
+
+Run it and see.
+
+---
+
+Now, let's capture the output.
+
+The `#greet` method is using `#puts`, so we need to replace the default IO object that is stored in the global variable `$stdout` with our own:
+
+```ruby
+#1. Set up
+person = Person.new
+output = StringIO.new
+$stdout = output
+
+#2. Execute
+person.greet('Edward')
+
+#3. Verify
+assert_equals(output.string, "Hi, Edward!\n")
+
+#  => nil
+```
+What happens when we run it? Nothing gets output? It all just returns `nil?`
+
+**Instruction:** Have a look at the output variable and see what strings have been appended to it. What does this mean?
+
+Let's be precise and only replace the default value for `#puts` when our application code is being run, and revert back to the default for out test helper method.
+
+```ruby
+#1. Set up
+person = Person.new
+output = StringIO.new #(intending to replace output)
+$stdout = output
+
+#2. Execute
+person.greet('Edward')
+
+#3. Verify
+$stdout = STDOUT
+assert_equals(output.string, "Hi, Edward!\n")
+
+# TEST PASSED
+# Expected: "Hi, Edward!\n"
+# Got: "Hi, Edward!\n"
+# => nil
+```
+
+:smiley:
+
+### To complete this challenge, you will need to:
+- [ ] Repeat the above exercises from scratch
+- [ ] Refactor your code, so you don't have to manually set and reset `$stdout`
+- [ ] With your pair partner, create some new, similar little methods for `Person` that use #puts and #print and test them
+
+### Resources
+
+- [thoughtbot - four phase testing](https://robots.thoughtbot.com/four-phase-test)
+
+[Back to project map](#project-map)
+
+<br/>
+<br/>
+<br/>
+
+## 6. Refactoring Step
+
+
+### Learning Objectives
+- [ ] Use blocks and yield
+
+### Intro
+
+Let's refactor the way we are testing so we don't have to manually set and reset `$stdout` for each output test. All methods can be optionally passed a block of code in ruby and we can use the keyword `yield` or optionally `block.call` to run the block of code when we want to. It's worth playing around in pry.
+
+```ruby
+def replace_stdout_with(replacement, &block)
+  $stdout = replacement
+
+  yield
+
+  $stdout = STDOUT
+end
+```
+
+```ruby
+#1. Setup
+person = Person.new
+output = StringIO.new
+
+#2. Execute
+replace_stdout_with(output) do
+  person.greet('Edward')
+end
+
+#3. Verify
+assert_equals(output.string, "Hi, Edward!\n")
+
+# TEST PASSED
+# Expected: "Hi, Edward!\n"
+# Got: "Hi, Edward!\n"
+```
+
+Nice. You've successfully isolated your dependency and found a way to inject it, allowing you to test your code more easily using a mock. :boom:
+
+### To complete this challenge, you will need to:
+- [ ] Repeat the above exercises from scratch
+- [ ] Reflect with your pair partner what you've learned
+- [ ] How [can you test](https://www.researchgate.net/publication/220807320_Student_self-assessment_in_a_programming_course_using_bloom's_revised_taxonomy) that you've learned it?
+
+### Further work
+- [ ] Using `StringIO` to figure out a way to test `#gets`
+- [ ] Instead of using `StringIO`, write your own class that implements the same interface - you'll know it works when you can use it instead of StringIO in the above example
+
+[Back to project map](#project-map)
+
+<br/>
+<br/>
+<br/>
+
+### Feedback
+#### If you got here - that's amazing!
+I'm keen to know any/all of the following - I'll read everything.
+
+- did you achieve the [project goal](#project-goals)?
+- the sub goals? Which ones?
+- what did you like about this inquiry project?
+- what did you find most useful in how you progressed through the project?
+- what did you find most difficult?
+- any other thoughts you have!
+
+Leave a comment below or shoot me an email at <%= config.my_email %>
