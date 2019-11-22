@@ -1,6 +1,6 @@
 <a href="/blog" class="title-link"><h2>Essays</h2></a>
 
-<% page_articles.group_by { |a| a.data.category }.each do |category, articles| %>
+<% page_articles.group_by { |a| a.data.category }.sort.each do |category, articles| %>
   <div class="col-4">
     <h3 class='blog-category-title'><%= category.capitalize %></h3>
     <% articles.each_with_index do |article, i| %>
