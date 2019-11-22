@@ -1,7 +1,7 @@
 ---
 title: My reading list
 author: dearshrewdwit
-date: 2019-11-31
+date: 2019-11-22
 gh_issue_number: 9
 ---
 
