@@ -414,7 +414,7 @@ I find I'm more successful when I
 - Constantly give clear success metrics for a unit of learning, which helps ingrain a test-driven approach to learning
 - Co-create learning plans with learners at the beginning part of the course that help them meet the success metrics
 - Give differentiated scaffolding for different learners
-- Am a [useful, clear, positive, & accessible resource](./responding-to-learners) to unblock learners as needed
+- Am a [useful, clear, positive, & accessible resource](../responding-to-learners) to unblock learners as needed
 
 #### [back](#for-facilitators)
 
