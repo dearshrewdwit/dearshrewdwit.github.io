@@ -3,6 +3,10 @@
   margin: 0 auto;
 }
 
+.article-title-section-line {
+  margin-bottom: 3em;
+}
+
 .article-content {
   float: left;
   margin-top: 30px;
@@ -32,8 +36,16 @@
   margin-top: 5em;
 }
 
+#article-comment-count {
+  font-style: italic;
+}
+
 h3 {
   margin-top: 2em;
+}
+
+.blog-image {
+  max-width: 50%;
 }
 
 @media handheld, only screen and (max-width: 767px) {

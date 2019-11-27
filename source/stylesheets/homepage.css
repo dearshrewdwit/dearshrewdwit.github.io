@@ -80,6 +80,7 @@ blockquote {
 
 .blog-category-title {
 	text-decoration: underline;
+	margin-top: 1em;
 }
 
 .title-link {

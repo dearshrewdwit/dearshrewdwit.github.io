@@ -5,6 +5,8 @@
 </div>
 
 <script type="text/javascript">
-  let element = $('#article-comments-list')
-  new GithubCommentList(element, <%= gh_issue_number %>)
+  let commentListElement = $('#article-comments-list')
+  let commentCountElement = $('#article-comment-count')
+
+  new GithubCommentList(commentListElement, commentCountElement, <%= gh_issue_number %>)
 </script>

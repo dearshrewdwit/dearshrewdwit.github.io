@@ -5,7 +5,6 @@ date: 2019-11-22
 gh_issue_number: 9
 ---
 
-___
 My top five resources that have had the most influence on the way I coach programming
 
 1. https://teachtogether.tech/

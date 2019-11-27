@@ -15,8 +15,13 @@
 
     <article class="article-content">
       <% if current_article %>
-        <h1><%= current_article.date.strftime('%b %-d %Y') %>: <%=  current_article.title %></h1>
+        <section class="article-title-section">
+          <h1 class='article-title'><%= current_article.date.strftime('%b %-d %Y') %>: <%=  current_article.title %></h1>
+          <div id='article-comment-count'>Jump to <%= link_to 'comments', '#article-comments' %></div>
+          <hr class='article-title-section-line'>
+        </section>
       <% end %>
+
 
       <%= yield %>
 

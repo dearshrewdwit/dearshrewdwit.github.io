@@ -5,7 +5,6 @@ date: 2019-10-22
 gh_issue_number: 6
 ---
 
-___
 
 https://www.forth.com/starting-forth/
 

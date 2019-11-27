@@ -6,7 +6,6 @@ gh_issue_number: 11
 ---
 
 
----
 A short challenge to reimplement the class keyword in ruby.
 
 I used `Kernel#binding` to set scope.

@@ -5,7 +5,6 @@ date: 2017-10-28
 gh_issue_number: 2
 ---
 
-___
 
 Every four weeks a new cohort of beginner developers comes through the doors of Makers Academy. Our students come from all manner of backgrounds and walks of life which makes working here an enriching experience. However, as diverse as their backgrounds are, for the most part, they have all been subjected to traditional education in a system designed to give information and then assess them according to criteria decided by others.
 

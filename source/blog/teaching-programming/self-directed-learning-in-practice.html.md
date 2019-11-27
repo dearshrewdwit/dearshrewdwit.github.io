@@ -5,8 +5,6 @@ date: 2019-10-17
 gh_issue_number: 3
 ---
 
-___
-
 Instead of reading this blog post, just read Number 4 on my [reading list](../my-reading-list).
 
 But really, read it.

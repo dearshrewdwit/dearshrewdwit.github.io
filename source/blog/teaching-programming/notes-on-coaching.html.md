@@ -5,7 +5,6 @@ date: 2017-12-04
 gh_issue_number: 1
 ---
 
-___
 
 Jump to [Part 2](#part-2) (Nov 4 2019)
 
