@@ -45,9 +45,14 @@
     </header>
 
     <article class="article-content">
-        <h1>Oct 17 2019: Responding to beginners.</h1>
+        <section class="article-title-section">
+          <h1 class='article-title'>Oct 17 2019: Responding to beginners.</h1>
+          <div id='article-comment-count'>Jump to <a href="#article-comments">comments</a></div>
+          <hr class='article-title-section-line'>
+        </section>
 
-      <hr>
+
+      <p>-draft-</p>
 
 <p>Getting better at learning is the best thing you can do.</p>
 
@@ -109,8 +114,10 @@ You know I&#39;ve been working with a cohort closely when they start repeating p
 </div>
 
 <script type="text/javascript">
-  let element = $('#article-comments-list')
-  new GithubCommentList(element, 4)
+  let commentListElement = $('#article-comments-list')
+  let commentCountElement = $('#article-comment-count')
+
+  new GithubCommentList(commentListElement, commentCountElement, 4)
 </script>
 
     </article>

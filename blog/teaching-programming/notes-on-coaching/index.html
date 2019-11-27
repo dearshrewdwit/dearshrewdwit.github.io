@@ -45,11 +45,14 @@
     </header>
 
     <article class="article-content">
-        <h1>Dec 4 2017: Notes on Coaching</h1>
+        <section class="article-title-section">
+          <h1 class='article-title'>Dec 4 2017: Notes on Coaching</h1>
+          <div id='article-comment-count'>Jump to <a href="#article-comments">comments</a></div>
+          <hr class='article-title-section-line'>
+        </section>
 
-      <hr>
 
-<p>Jump to <a href="#part-2">Part 2</a> (Nov 4 2019)</p>
+      <p>Jump to <a href="#part-2">Part 2</a> (Nov 4 2019)</p>
 
 <hr>
 
@@ -278,8 +281,10 @@
 </div>
 
 <script type="text/javascript">
-  let element = $('#article-comments-list')
-  new GithubCommentList(element, 1)
+  let commentListElement = $('#article-comments-list')
+  let commentCountElement = $('#article-comment-count')
+
+  new GithubCommentList(commentListElement, commentCountElement, 1)
 </script>
 
     </article>

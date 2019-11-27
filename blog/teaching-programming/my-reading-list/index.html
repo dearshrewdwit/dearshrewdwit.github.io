@@ -45,11 +45,14 @@
     </header>
 
     <article class="article-content">
-        <h1>Nov 22 2019: My reading list</h1>
+        <section class="article-title-section">
+          <h1 class='article-title'>Nov 22 2019: My reading list</h1>
+          <div id='article-comment-count'>Jump to <a href="#article-comments">comments</a></div>
+          <hr class='article-title-section-line'>
+        </section>
 
-      <hr>
 
-<p>My top five resources that have had the most influence on the way I coach programming</p>
+      <p>My top five resources that have had the most influence on the way I coach programming</p>
 
 <ol>
 <li><a href="https://teachtogether.tech/">https://teachtogether.tech/</a></li>
@@ -69,8 +72,10 @@
 </div>
 
 <script type="text/javascript">
-  let element = $('#article-comments-list')
-  new GithubCommentList(element, 9)
+  let commentListElement = $('#article-comments-list')
+  let commentCountElement = $('#article-comment-count')
+
+  new GithubCommentList(commentListElement, commentCountElement, 9)
 </script>
 
     </article>

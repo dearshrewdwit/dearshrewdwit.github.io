@@ -45,11 +45,14 @@
     </header>
 
     <article class="article-content">
-        <h1>Jun 12 2019: Reimplementing classes in ruby</h1>
+        <section class="article-title-section">
+          <h1 class='article-title'>Jun 12 2019: Reimplementing classes in ruby</h1>
+          <div id='article-comment-count'>Jump to <a href="#article-comments">comments</a></div>
+          <hr class='article-title-section-line'>
+        </section>
 
-      <hr>
 
-<p>A short challenge to reimplement the class keyword in ruby.</p>
+      <p>A short challenge to reimplement the class keyword in ruby.</p>
 
 <p>I used <code>Kernel#binding</code> to set scope.</p>
 
@@ -116,8 +119,10 @@
 </div>
 
 <script type="text/javascript">
-  let element = $('#article-comments-list')
-  new GithubCommentList(element, 11)
+  let commentListElement = $('#article-comments-list')
+  let commentCountElement = $('#article-comment-count')
+
+  new GithubCommentList(commentListElement, commentCountElement, 11)
 </script>
 
     </article>

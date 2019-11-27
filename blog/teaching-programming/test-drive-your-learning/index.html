@@ -45,11 +45,14 @@
     </header>
 
     <article class="article-content">
-        <h1>Oct 28 2017: Advice to learners - Test-drive your learning</h1>
+        <section class="article-title-section">
+          <h1 class='article-title'>Oct 28 2017: Advice to learners - Test-drive your learning</h1>
+          <div id='article-comment-count'>Jump to <a href="#article-comments">comments</a></div>
+          <hr class='article-title-section-line'>
+        </section>
 
-      <hr>
 
-<p>Every four weeks a new cohort of beginner developers comes through the doors of Makers Academy. Our students come from all manner of backgrounds and walks of life which makes working here an enriching experience. However, as diverse as their backgrounds are, for the most part, they have all been subjected to traditional education in a system designed to give information and then assess them according to criteria decided by others.</p>
+      <p>Every four weeks a new cohort of beginner developers comes through the doors of Makers Academy. Our students come from all manner of backgrounds and walks of life which makes working here an enriching experience. However, as diverse as their backgrounds are, for the most part, they have all been subjected to traditional education in a system designed to give information and then assess them according to criteria decided by others.</p>
 
 <p>It is with this expectation most students start the course: they will be given lots of information about how to code and at regular intervals they will be told how they are doing.</p>
 
@@ -173,8 +176,10 @@
 </div>
 
 <script type="text/javascript">
-  let element = $('#article-comments-list')
-  new GithubCommentList(element, 2)
+  let commentListElement = $('#article-comments-list')
+  let commentCountElement = $('#article-comment-count')
+
+  new GithubCommentList(commentListElement, commentCountElement, 2)
 </script>
 
     </article>

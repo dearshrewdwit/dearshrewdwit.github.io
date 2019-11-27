@@ -1,0 +1,1 @@
+function CommentCount(n){function t(){return["<span> ("+n.length+")</span>"].join("")}return{render:t}}

@@ -45,9 +45,14 @@
     </header>
 
     <article class="article-content">
-        <h1>Nov 18 2019: Education is a product and a service</h1>
+        <section class="article-title-section">
+          <h1 class='article-title'>Nov 18 2019: Education is a product and a service</h1>
+          <div id='article-comment-count'>Jump to <a href="#article-comments">comments</a></div>
+          <hr class='article-title-section-line'>
+        </section>
 
-      <hr>
+
+      <p>-draft-</p>
 
 <p>Education is a product and a service. What is design?
 This should work.</p>
@@ -60,8 +65,10 @@ This should work.</p>
 </div>
 
 <script type="text/javascript">
-  let element = $('#article-comments-list')
-  new GithubCommentList(element, 8)
+  let commentListElement = $('#article-comments-list')
+  let commentCountElement = $('#article-comment-count')
+
+  new GithubCommentList(commentListElement, commentCountElement, 8)
 </script>
 
     </article>

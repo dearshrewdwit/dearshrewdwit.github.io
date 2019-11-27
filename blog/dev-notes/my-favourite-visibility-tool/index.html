@@ -45,9 +45,16 @@
     </header>
 
     <article class="article-content">
-        <h1>Nov 20 2019: My favourite debugging tool in ruby</h1>
+        <section class="article-title-section">
+          <h1 class='article-title'>Nov 20 2019: My favourite debugging tool in ruby</h1>
+          <div id='article-comment-count'>Jump to <a href="#article-comments">comments</a></div>
+          <hr class='article-title-section-line'>
+        </section>
 
-      <p>binding.pry</p>
+
+      <p>-draft-</p>
+
+<p>binding.pry</p>
 
 
         <div id="article-comments">
@@ -57,8 +64,10 @@
 </div>
 
 <script type="text/javascript">
-  let element = $('#article-comments-list')
-  new GithubCommentList(element, 14)
+  let commentListElement = $('#article-comments-list')
+  let commentCountElement = $('#article-comment-count')
+
+  new GithubCommentList(commentListElement, commentCountElement, 14)
 </script>
 
     </article>

@@ -45,11 +45,14 @@
     </header>
 
     <article class="article-content">
-        <h1>Nov 20 2019: An experiment to learn about mocking by testing stdout in Ruby</h1>
+        <section class="article-title-section">
+          <h1 class='article-title'>Nov 20 2019: An experiment to learn about mocking by testing stdout in Ruby</h1>
+          <div id='article-comment-count'>Jump to <a href="#article-comments">comments</a></div>
+          <hr class='article-title-section-line'>
+        </section>
 
-      <hr>
 
-<p><br/>
+      <p><br/>
 <br/></p>
 
 <h1 id="inquiry-projects">Inquiry Projects</h1>
@@ -671,8 +674,10 @@ a string <span style="color: #657b83"># output</span>
 </div>
 
 <script type="text/javascript">
-  let element = $('#article-comments-list')
-  new GithubCommentList(element, 13)
+  let commentListElement = $('#article-comments-list')
+  let commentCountElement = $('#article-comment-count')
+
+  new GithubCommentList(commentListElement, commentCountElement, 13)
 </script>
 
     </article>

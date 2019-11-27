@@ -45,11 +45,14 @@
     </header>
 
     <article class="article-content">
-        <h1>Oct 17 2019: Self-directed learning in practice.</h1>
+        <section class="article-title-section">
+          <h1 class='article-title'>Oct 17 2019: Self-directed learning in practice.</h1>
+          <div id='article-comment-count'>Jump to <a href="#article-comments">comments</a></div>
+          <hr class='article-title-section-line'>
+        </section>
 
-      <hr>
 
-<p>Instead of reading this blog post, just read Number 4 on my <a href="../my-reading-list">reading list</a>.</p>
+      <p>Instead of reading this blog post, just read Number 4 on my <a href="../my-reading-list">reading list</a>.</p>
 
 <p>But really, read it.</p>
 
@@ -570,8 +573,10 @@
 </div>
 
 <script type="text/javascript">
-  let element = $('#article-comments-list')
-  new GithubCommentList(element, 3)
+  let commentListElement = $('#article-comments-list')
+  let commentCountElement = $('#article-comment-count')
+
+  new GithubCommentList(commentListElement, commentCountElement, 3)
 </script>
 
     </article>
